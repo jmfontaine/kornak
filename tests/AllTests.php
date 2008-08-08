@@ -27,7 +27,7 @@ class AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Kaoja');
 
-        $suite->addTest(Kaoja_AllTests::suite());
+        $suite->addTest(Kajoa_AllTests::suite());
 
         return $suite;
     }

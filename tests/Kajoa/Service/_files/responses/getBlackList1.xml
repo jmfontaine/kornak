@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsp>
+    <blacklist nb="2"/>
+    <pseudo name="foo"/>
+    <pseudo name="bar"/>
+</rsp>

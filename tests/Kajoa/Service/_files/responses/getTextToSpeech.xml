@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsp>
+    <voiceListTTS nb="2"/>
+    <voice lang="fr" command="FR-Anastasie"/>
+    <voice lang="de" command="DE-Otto"/>
+</rsp>

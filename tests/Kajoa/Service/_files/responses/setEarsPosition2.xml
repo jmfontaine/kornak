@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rsp>
+    <message>EARPOSITIONNOTSENT</message>
+    <comment>Your ears command could not be sent</comment>
+</rsp>
