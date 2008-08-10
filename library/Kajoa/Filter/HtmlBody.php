@@ -1,6 +1,5 @@
 <?php
-class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier
-{
+class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier {
     protected function _getCurrentDoctype()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
@@ -23,6 +22,7 @@ class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier
                 break;
             default:
                 $result = null;
+                break;
         }
         
         return $result;        

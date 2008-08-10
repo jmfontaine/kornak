@@ -9,7 +9,7 @@ class Kajoa_Filter_HtmlPurifier implements Zend_Filter_Interface
     {
         // Set cache path if not defined yet
         $cachePathFound = false;
-        foreach($options as $name => $value) {
+        foreach ($options as $name => $value) {
             if ('Cache.SerializerPath' == $name) {
                 $cachePathFound = true;
                 break;
