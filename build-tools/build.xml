@@ -3,7 +3,7 @@
     <property file="${application.startdir}/build.properties" />
 
     <!-- Build everything --> 
-    <target name="build" description="" depends="clean.build, build.sources, build.docs">
+    <target name="build" description="" depends="clean.build, build.sources, build.docs, run.tests">
         <echo message="Creating archives..." />
         <tar destfile="${build.tarball}.gzip" basedir="${build.path.bin}" compression="gzip" />
         <zip destfile="${build.zipball}" basedir="${build.path}" />
@@ -30,6 +30,19 @@
                 <include name="**/*.php" />
             </fileset>
         </phpdoc>
+    </target>
+    
+    <!-- Run tests --> 
+    <target name="run.tests" description="Run tests">
+        <echo msg="Running tests..." />
+        <phpunit2 haltonfailure="true">
+            <formatter type="plain" usefile="false"/>
+            <batchtest>
+                <fileset dir="${tests.path}">
+                    <include name="**/*Test.php"/>
+                </fileset>
+            </batchtest>
+        </phpunit2>
     </target>
 
     <!-- Clean everything --> 
