@@ -1,0 +1,94 @@
+#!/usr/bin/php
+<?php
+require_once 'Zend/Console/Getopt.php';
+require_once 'Zend/Filter/Word/DashToCamelCase.php';
+
+class KajoaDev
+{
+    protected $_options;
+    
+    protected function _check()
+    {
+        $path    = dirname(__FILE__) . '/../library';
+        $command = 'phpcs --standard=Zend --extensions=php ' . $path;
+        return $this->_executeCommand($command);
+    }
+
+    protected function _executeCommand($command)
+    {
+        exec($command, $output, $returnValue);
+        
+        if (!isset($this->_options->quiet)) {
+            echo implode(PHP_EOL, $output) . PHP_EOL;
+        }
+        
+        return $returnValue;
+    }
+
+    protected function _getMethodName($argument)
+    {
+        $filter = new Zend_Filter_Word_DashToCamelCase();
+        $value  = $filter->filter($argument);
+        
+        $methodName = '_' . strtolower($value[0]) . substr($value, 1);
+        return $methodName;
+    }
+
+    protected function _help()
+    {
+        self::displayUsage();
+    }
+
+    protected function _test()
+    {
+        $path    = dirname(__FILE__) . '/../tests/AllTests.php';
+        $command = 'phpunit AllTests ' . $path;
+        return $this->_executeCommand($command);
+    }
+    
+    protected function __construct(Zend_Console_Getopt $options)
+    {
+        $this->_options = $options;
+    }
+
+    public static function displayUsage()
+    {
+        $usage  = "Usage: kajoa-dev [options] command\n";
+        $usage .= "\n";
+        $usage .= "Commands:\n";
+        $usage .= "\tcheck\t\tCheck coding standard\n";
+        $usage .= "\ttest\t\tRun unit tests\n";
+        $usage .= "\n";
+        $usage .= "Options:\n";
+        $usage .= "\t-q, --quiet\tDo not display anything\n";
+        echo $usage;
+    }
+
+    public static function run()
+    {
+        try {
+            $config  = array('quiet|q' => 'Quiet');
+            $options = new Zend_Console_Getopt($config);
+            
+            $remainingArguments = $options->getRemainingArgs();
+            if (1 != count($remainingArguments)) {
+                $options->getUsageMessage();
+                exit;
+            }
+
+            $instance = new self($options);
+            $method  = $instance->_getMethodName($remainingArguments[0]);
+            if (method_exists('KajoaDev', $method)) {
+                return $instance->$method();
+            } else {
+                self::displayUsage();
+                exit;
+            }             
+        } catch (Zend_Console_Getopt_Exception $exception) {
+            self::displayUsage();
+            exit;
+        }            
+    }
+}
+
+KajoaDev::run();
