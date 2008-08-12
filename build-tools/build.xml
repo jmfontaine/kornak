@@ -1,4 +1,65 @@
 <?xml version="1.0"?>
+<!--
+ Kajoa
+ Copyright (c) 2007-2008, Kanopée.
+
+ License :
+
+ This source file is subject to the new BSD license that is bundled
+ with this package in the file LICENSE.txt.
+ 
+ Requirements:
+ 
+ - PHP 5.1.4
+ - Phing 2.3.0
+ - PHPDocumentor 1.3.1
+ - VersionControl_SVN 0.3
+ - PHPUnit 3.0.0
+
+ Usage:
+
+    phing [<options>] [<targets>]
+
+ Options:
+
+    -D<property>=<value>
+        Override a property defined in the build.properties file.
+ 
+ Targets:
+
+    build
+        Build sources, all documentations and create archives.
+        
+    build.sources
+        Build sources.
+        
+    build.docs
+        Build all the documentations.
+        
+    build.docs.api
+        Build only the API documentation
+    
+    run.tests
+        Run unit tests.
+        
+    run.checkstyle
+        Run checkstyle to check code for coding standard violations.
+        
+    clean.all
+        Clean everything.
+        
+    clean.build
+        Clean the build folder.
+        
+    clean.sources
+        Clean the sources.
+        
+    clean.docs
+        Clean all the documentations.
+        
+    clean.docs.api
+        Clean only the API documentation.
+-->
 <project name="Kajoa" default="build" basedir=".">
     <property file="${application.startdir}/build.properties" />
 
@@ -45,8 +106,18 @@
         </phpunit2>
     </target>
 
+    <!-- Run checkstyle --> 
+    <target name="run.checkstyle" description="Run checkstyle">
+        <echo msg="Running checkstyle..." />
+        <PhpCodeSniffer showWarnings="false" standard="Zend">
+            <fileset dir="${build.path.bin}/library">
+                <include name="**/*"/>
+            </fileset>
+        </PhpCodeSniffer>
+    </target>
+
     <!-- Clean everything --> 
-    <target name="clean.all" depends="clean.sources, clean.docs" description="Clean out everything" />
+    <target name="clean.all" depends="clean.sources, clean.docs, clean.build" description="Clean out everything" />
 
     <!-- Clean build directory --> 
     <target name="clean.build" description="Clean out build directory">
