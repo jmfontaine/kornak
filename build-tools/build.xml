@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<project name="Kajoa" default="build" basedir=".">
+    <property file="${application.startdir}/build.properties" />
+
+    <!-- Build everything --> 
+    <target name="build" description="" depends="clean.build, build.sources, build.docs">
+        <echo message="Creating archives..." />
+        <tar destfile="${build.tarball}.gzip" basedir="${build.path.bin}" compression="gzip" />
+        <zip destfile="${build.zipball}" basedir="${build.path}" />
+    </target>
+
+    <!-- Build sources -->
+    <target name="build.sources" description="" depends="clean.sources">
+        <echo msg="Exporting sources..." />
+        <svnexport svnpath="svn" repositoryurl="${project.svn.url}" todir="${build.path.bin}" />
+    </target>
+
+    <!-- Build all documentations -->
+    <target name="build.docs" depends="build.docs.api"
+        description="Build both docbook manual and phpdoc API documentation." />
+    
+    <!-- Build API documentation -->
+    <target name="build.docs.api" depends="clean.docs.api">
+        <mkdir dir="${docs.api.path.dest}" />
+        <phpdoc title="${docs.api.title}"
+            destdir="${docs.api.path.dest}"
+            output="${docs.api.style}"
+            quiet="true">
+            <fileset dir="${docs.api.path.src}">
+                <include name="**/*.php" />
+            </fileset>
+        </phpdoc>
+    </target>
+
+    <!-- Clean everything --> 
+    <target name="clean.all" depends="clean.sources, clean.docs" description="Clean out everything" />
+
+    <!-- Clean build directory --> 
+    <target name="clean.build" description="Clean out build directory">
+        <echo msg="Cleaning out build directory..." />
+        <delete failonerror="true">
+            <fileset dir="${build.path}">
+                <include name="*" />
+            </fileset>
+        </delete>
+    </target>
+
+    <!-- Clean sources --> 
+    <target name="clean.sources" description="Clean out sources">
+        <echo msg="Cleaning out sources..." />
+        <delete dir="${build.path.bin}" failonerror="false" />
+    </target>
+
+    <!-- Clean documentations --> 
+    <target name="clean.docs" depends="clean.docs.api" description="Clean out documentations" />
+
+    <!-- Clean API documentation --> 
+    <target name="clean.docs.api" description="Clean out API documentation">
+        <delete dir="${docs.api.path.dest}" failonerror="false" />
+    </target>
+
+</project>
