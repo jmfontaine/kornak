@@ -74,6 +74,7 @@
     <target name="build.sources" description="" depends="clean.sources">
         <echo msg="Exporting sources..." />
         <svnexport svnpath="svn" repositoryurl="${project.svn.url}" todir="${build.path.bin}" />
+        <delete dir="${build.path.bin}/dev-tools" failonerror="true" />
     </target>
 
     <!-- Build all documentations -->
