@@ -7,10 +7,34 @@ class KajoaDev
 {
     protected $_options;
     
+    protected function _buildArgumentsString(array $arguments)
+    {
+        $argumentsString = ''; 
+        foreach ($arguments as $key => $value) {
+            if (is_string($key)) {
+                $argumentsString .= "--$key=$value ";
+            } else {
+                $argumentsString .= "-$value ";
+            }
+        }
+        return trim($argumentsString);
+    }
+    
     protected function _check()
     {
-        $path    = dirname(__FILE__) . '/../library';
-        $command = 'phpcs --standard=Zend --extensions=php ' . $path;
+        $arguments = array(
+            'standard'   => 'Zend',
+            'extensions' => 'php',
+            'ignore'     => '*/Kajoa/View/Smarty/Helpers/*',
+        );
+        
+        if (!isset($this->_options->warning)) {
+            $arguments[] = 'n'; 
+        }
+        
+        $argumentsString = $this->_buildArgumentsString($arguments);
+        $path            = dirname(__FILE__) . '/../library';
+        $command         = "phpcs $argumentsString $path";
         return $this->_executeCommand($command);
     }
 
@@ -53,7 +77,8 @@ class KajoaDev
 
     public static function displayUsage()
     {
-        $usage  = "Usage: kajoa-dev [options] command\n";
+        $usage  = "\n";
+        $usage .= "Usage: kajoa-dev [options] command\n";
         $usage .= "\n";
         $usage .= "Commands:\n";
         $usage .= "\tcheck\t\tCheck coding standard\n";
@@ -61,13 +86,18 @@ class KajoaDev
         $usage .= "\n";
         $usage .= "Options:\n";
         $usage .= "\t-q, --quiet\tDo not display anything\n";
+        $usage .= "\t-w, --warning\tInclude warnings in 'check' command\n";
+        $usage .= "\n";
         echo $usage;
     }
 
     public static function run()
     {
         try {
-            $config  = array('quiet|q' => 'Quiet');
+            $config  = array(
+                'quiet|q'   => 'Quiet',
+                'warning|w' => 'Warning',    
+            );
             $options = new Zend_Console_Getopt($config);
             
             $remainingArguments = $options->getRemainingArgs();
