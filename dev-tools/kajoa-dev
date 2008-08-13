@@ -7,37 +7,37 @@ class KajoaDev
 {
     protected $_options;
     
-    protected function _buildArgumentsString(array $arguments)
+    protected function _api()
     {
-        $argumentsString = ''; 
-        foreach ($arguments as $key => $value) {
-            if (is_string($key)) {
-                $argumentsString .= "--$key=$value ";
-            } else {
-                $argumentsString .= "-$value ";
-            }
+        $rootPath   = dirname(__FILE__) . '/..';
+        
+        $arguments  = " --filename $rootPath/library/*.php";
+        $arguments .= ' --output HTML:frames:earthli';
+        $arguments .= " --target $rootPath/dev-tools/temp/documentation/api";
+        
+        if (!isset($this->_options->quiet)) {
+            $arguments .= ' -q'; 
         }
-        return trim($argumentsString);
-    }
+
+        $command = "phpdoc $arguments";
+        return $this->_executeCommand($command);
+    }    
     
     protected function _check()
     {
-        $arguments = array(
-            'standard'   => 'Zend',
-            'extensions' => 'php',
-            'ignore'     => '*/Kajoa/View/Smarty/Helpers/*',
-        );
+        $arguments  = ' --standard=Zend';
+        $arguments .= ' --extensions=php';
+        $arguments .=  '--ignore=*/Kajoa/View/Smarty/Helpers/*';
         
         if (!isset($this->_options->warning)) {
-            $arguments[] = 'n'; 
+            $arguments .= ' -n'; 
         }
         
-        $argumentsString = $this->_buildArgumentsString($arguments);
-        $path            = dirname(__FILE__) . '/../library';
-        $command         = "phpcs $argumentsString $path";
+        $path    = dirname(__FILE__) . '/../library';
+        $command = "phpcs $arguments $path";
         return $this->_executeCommand($command);
     }
-
+    
     protected function _executeCommand($command)
     {
         exec($command, $output, $returnValue);
@@ -81,6 +81,7 @@ class KajoaDev
         $usage .= "Usage: kajoa-dev [options] command\n";
         $usage .= "\n";
         $usage .= "Commands:\n";
+        $usage .= "\tapi\t\tBuild API documentation\n";
         $usage .= "\tcheck\t\tCheck coding standard\n";
         $usage .= "\ttest\t\tRun unit tests\n";
         $usage .= "\n";
