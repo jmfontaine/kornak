@@ -26,8 +26,10 @@ class Kajoa_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
         switch ($placement) {
             case self::APPEND:
                 return $content . $separator . $errors;
+                break;
             case self::PREPEND:
                 return $errors . $separator . $content;
+                break;
         }
     }
 }

@@ -2,18 +2,26 @@
 class Kajoa_Validate_FileUpload extends Zend_Validate_Abstract
 {
 
-    const INI_SIZE   = 'iniSize';   // The uploaded file exceeds the upload_max_filesize directive in php.ini
-    const FORM_SIZE  = 'formSize';  // The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the form 
-    const PARTIAL    = 'partial';   // The uploaded file was only partially uploaded
+    const INI_SIZE   = 'iniSize';   // The uploaded file exceeds the
+                                    // upload_max_filesize directive in php.ini
+    const FORM_SIZE  = 'formSize';  // The uploaded file exceeds the
+                                    // MAX_FILE_SIZE directive that was
+                                    // specified in the form 
+    const PARTIAL    = 'partial';   // The uploaded file was only partially
+                                    // uploaded
     const NO_FILE    = 'noFile';    // No file was uploaded
     const NO_TMP_DIR = 'noTmpDir';  // Missing a temporary folder
     const CANT_WRITE = 'cantWrite'; // Failed to write file to disk
-    const EXTENSION  = 'extension'; // File upload stopped by extension. (Introduced in PHP 5.2.0) 
-    const ERROR      = 'error';     // General error for future proofing against new PHP versions
+    const EXTENSION  = 'extension'; // File upload stopped by extension.
+                                    // (Introduced in PHP 5.2.0) 
+    const ERROR      = 'error';     // General error for future proofing against
+                                    // new PHP versions
 
     protected $_messageTemplates = array(
-        self::INI_SIZE   => 'The uploaded file exceeds the upload_max_filesize directive in php.ini',
-        self::FORM_SIZE  => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the form',
+        self::INI_SIZE   => 'The uploaded file exceeds the ' .
+                            ' upload_max_filesize directive in php.ini',
+        self::FORM_SIZE  => 'The uploaded file exceeds the MAX_FILE_SIZE ' .
+                            'directive that was specified in the form',
         self::PARTIAL    => 'The uploaded file was only partially uploaded',
         self::NO_FILE    => 'No file was uploaded',
         self::NO_TMP_DIR => 'Missing a temporary folder',
@@ -42,7 +50,7 @@ class Kajoa_Validate_FileUpload extends Zend_Validate_Abstract
         $valueString = '';
         $error       = UPLOAD_ERR_NO_FILE;
         
-        if((is_array($value) || $value instanceof ArrayObject) 
+        if ((is_array($value) || $value instanceof ArrayObject) 
             && array_key_exists('error', $value)) {
             // Set the error to the correct value
             $error = $value['error'];
@@ -86,7 +94,8 @@ class Kajoa_Validate_FileUpload extends Zend_Validate_Abstract
                 $this->_error(self::CANT_WRITE);
                 break;
                 
-            case 8: // UPLOAD_ERR_EXTENSION isn't defined in PHP 5.1.4, so use the value
+            case 8: // UPLOAD_ERR_EXTENSION isn't defined in PHP 5.1.4,
+                    // so use the value
                 $this->_error(self::EXTENSION);
                 break;
                 

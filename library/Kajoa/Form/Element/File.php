@@ -2,13 +2,16 @@
 /**
  * This class was heavily inspired by Rob Allen's following blog entries :
  * 
- * @link http://akrabat.com/2008/04/07/simple-zend_form-file-upload-example/ Simple Zend_Form File Upload Example 
- * @link http://akrabat.com/2008/05/16/simple-zend_form-file-upload-example-revisited/ Simple Zend_Form File Upload Example Revisited
+ * @link http://akrabat.com/2008/04/07/simple-zend_form-file-upload-example/
+ *      Simple Zend_Form File Upload Example 
+ * @link http://akrabat.com/2008/05/16/simple-zend_form-file-upload-example-revisited/
+ *      Simple Zend_Form File Upload Example Revisited
  */
 class Kajoa_Form_Element_File extends Zend_Form_Element_Xhtml
 {
     /**
-     * Flag indicating whether or not to insert FileUpload validator when element is required
+     * Flag indicating whether or not to insert FileUpload validator
+     * when element is required
      * @var bool
      */
     protected $_autoInsertFileUploadValidator = true;
@@ -36,7 +39,8 @@ class Kajoa_Form_Element_File extends Zend_Form_Element_Xhtml
     }
     
     /**
-     * Set flag indicating whether a FileUpload validator should be inserted when element is required
+     * Set flag indicating whether a FileUpload validator should be inserted
+     * when element is required
      * 
      * @param  bool $flag 
      * @return Zend_Form_Element
@@ -48,7 +52,8 @@ class Kajoa_Form_Element_File extends Zend_Form_Element_Xhtml
     }
 
     /**
-     * Get flag indicating whether a FileUpload validator should be inserted when element is required
+     * Get flag indicating whether a FileUpload validator should be inserted
+     * when element is required
      * 
      * @return bool
      */
@@ -62,27 +67,24 @@ class Kajoa_Form_Element_File extends Zend_Form_Element_Xhtml
     {
         $key  = $this->getName();
         $form = $this->getBelongsTo();
-        if(null === $value) {
-            if(isset($_FILES[$key])) {
+        if (null === $value) {
+            if (isset($_FILES[$key])) {
                 $value = new Kajoa_Form_Element_File_Value($_FILES[$key], ArrayObject::ARRAY_AS_PROPS);
-            } elseif(!empty($_FILES[$form]['name'][$key])) {
-                $value = new Kajoa_Form_Element_File_Value(
-                    array(
-                        'name'     => $_FILES[$form]['name'][$key],
-                        'tmp_name' => $_FILES[$form]['tmp_name'][$key],
-                        'type'     => $_FILES[$form]['type'][$key],
-                        'error'    => $_FILES[$form]['error'][$key],
-                        'size'     => $_FILES[$form]['size'][$key]
-                    ),
-                    ArrayObject::ARRAY_AS_PROPS
+            } elseif (!empty($_FILES[$form]['name'][$key])) {
+                $config = array(
+                    'name'     => $_FILES[$form]['name'][$key],
+                    'tmp_name' => $_FILES[$form]['tmp_name'][$key],
+                    'type'     => $_FILES[$form]['type'][$key],
+                    'error'    => $_FILES[$form]['error'][$key],
+                    'size'     => $_FILES[$form]['size'][$key]
                 );
+                
+                $value = new Kajoa_Form_Element_File_Value($config, ArrayObject::ARRAY_AS_PROPS);
             }
         }
         
         // Auto insert FileUpload validator
-        if ($this->autoInsertFileUploadValidator()
-            && !$this->getValidator('FileUpload'))
-        {
+        if ($this->autoInsertFileUploadValidator() && !$this->getValidator('FileUpload')) {
             $fileValidator = new Kajoa_Validate_FileUpload($this->isRequired());
             
             $validators = $this->getValidators();

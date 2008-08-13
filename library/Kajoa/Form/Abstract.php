@@ -71,7 +71,7 @@ class Kajoa_Form_Abstract extends Zend_Form
         $decorators = $this->getDecorators();
         if (empty($decorators)) {
             $this->addDecorator('FormElements')
-                 ->addDecorator('HtmlTag'   , array('tag' => 'dl'))
+                 ->addDecorator('HtmlTag', array('tag' => 'dl'))
                  ->addDecorator('FormErrors', array('class' => 'form-errors'))
                  ->addDecorator('Form');
         }

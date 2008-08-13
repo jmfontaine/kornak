@@ -22,7 +22,7 @@ class Kajoa_Service_Nabaztag_Message
 
     public function getFrom()
     {
-        return $this->_From;
+        return $this->_from;
     }
 
     public function getTitle()
@@ -32,6 +32,6 @@ class Kajoa_Service_Nabaztag_Message
 
     public function getUrl()
     {
-        return $this->_Url;
+        return $this->_url;
     }
 }

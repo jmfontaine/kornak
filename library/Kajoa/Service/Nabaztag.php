@@ -15,7 +15,8 @@ class Kajoa_Service_Nabaztag
     {
         $position = (int) $position;
         if (0 > $position || 16 < $position) {
-            throw new Kajoa_Service_Nabaztag_Exception('Ear position must be an integer between 0 and 16');
+            $message = 'Ear position must be an integer between 0 and 16';
+            throw new Kajoa_Service_Nabaztag_Exception($message);
         }
         return $position;
     }
@@ -40,16 +41,14 @@ class Kajoa_Service_Nabaztag
 
     public function getBlackList()
     {
-        $response = $this->_sendCommand(
-            array('action' => 6)
-        );
+        $response = $this->_sendCommand(array('action' => 6));
         
         if ($response->isError()) {
             return false;
         }
         
         $names = array();
-        foreach($response->getBody()->pseudo as $item) {
+        foreach ($response->getBody()->pseudo as $item) {
             $names[] = (string) $item['name'];
         }
 
@@ -58,9 +57,7 @@ class Kajoa_Service_Nabaztag
     
     public function getEarsPosition()
     {
-        $response = $this->_sendCommand(
-            array('ears' => 'ok')
-        );
+        $response = $this->_sendCommand(array('ears' => 'ok'));
         
         if ($response->isError()) {
             return false;
@@ -75,16 +72,14 @@ class Kajoa_Service_Nabaztag
 
     public function getFriends()
     {
-        $response = $this->_sendCommand(
-            array('action' => 2)
-        );
+        $response = $this->_sendCommand(array('action' => 2));
         
         if ($response->isError()) {
             return false;
         }
         
         $names = array();
-        foreach($response->getBody()->friend as $item) {
+        foreach ($response->getBody()->friend as $item) {
             $names[] = (string) $item['name'];
         }
 
@@ -94,9 +89,7 @@ class Kajoa_Service_Nabaztag
     public function getHttpClient()
     {
         if (null === $this->_httpClient) {
-            $this->setHttpClient(
-                new Zend_Http_Client()
-            );
+            $this->setHttpClient(new Zend_Http_Client());
         }
         
         return $this->_httpClient;    
@@ -104,16 +97,14 @@ class Kajoa_Service_Nabaztag
     
     public function getLanguages()
     {
-        $response = $this->_sendCommand(
-            array('action' => 11)
-        );
+        $response = $this->_sendCommand(array('action' => 11));
         
         if ($response->isError()) {
             return false;
         }
         
         $languages = array();
-        foreach($response->getBody()->myLang as $item) {
+        foreach ($response->getBody()->myLang as $item) {
             $languages[] = (string) $item['lang'];
         }
 
@@ -122,9 +113,7 @@ class Kajoa_Service_Nabaztag
     
     public function getLeftEarPosition()
     {
-        $response = $this->_sendCommand(
-            array('ears' => 'ok')
-        );
+        $response = $this->_sendCommand(array('ears' => 'ok'));
         
         if ($response->isError()) {
             return false;
@@ -135,16 +124,14 @@ class Kajoa_Service_Nabaztag
 
     public function getMessages()
     {
-        $response = $this->_sendCommand(
-            array('action' => 3)
-        );
+        $response = $this->_sendCommand(array('action' => 3));
         
         if ($response->isError()) {
             return false;
         }
         
         $messages = array();
-        foreach($response->getBody()->msg as $message) {
+        foreach ($response->getBody()->msg as $message) {
             $messages[] = new Kajoa_Service_Nabaztag_Message(
                 (string) $message['from'],
                 (string) $message['title'],
@@ -158,9 +145,7 @@ class Kajoa_Service_Nabaztag
     
     public function getName()
     {
-        $response = $this->_sendCommand(
-            array('action' => 10)
-        );
+        $response = $this->_sendCommand(array('action' => 10));
         
         if ($response->isError()) {
             return false;
@@ -171,9 +156,7 @@ class Kajoa_Service_Nabaztag
     
     public function getRightEarPosition()
     {
-        $response = $this->_sendCommand(
-            array('ears' => 'ok')
-        );
+        $response = $this->_sendCommand(array('ears' => 'ok'));
         
         if ($response->isError()) {
             return false;
@@ -184,9 +167,7 @@ class Kajoa_Service_Nabaztag
 
     public function getSignature()
     {
-        $response = $this->_sendCommand(
-            array('action' => 5)
-        );
+        $response = $this->_sendCommand(array('action' => 5));
         
         if ($response->isError()) {
             return false;
@@ -197,16 +178,14 @@ class Kajoa_Service_Nabaztag
 
     public function getTextToSpeechLanguages()
     {
-        $response = $this->_sendCommand(
-            array('action' => 9)
-        );
+        $response = $this->_sendCommand(array('action' => 9));
         
         if ($response->isError()) {
             return false;
         }
         
         $languages = array();
-        foreach($response->getBody()->voice as $item) {
+        foreach ($response->getBody()->voice as $item) {
             $languages[] = (string) $item['lang'];
         }
 
@@ -215,16 +194,14 @@ class Kajoa_Service_Nabaztag
     
     public function getTextToSpeechVoices($language = null)
     {
-        $response = $this->_sendCommand(
-            array('action' => 9)
-        );
+        $response = $this->_sendCommand(array('action' => 9));
         
         if ($response->isError()) {
             return false;
         }
         
         $voices = array();
-        foreach($response->getBody()->voice as $item) {
+        foreach ($response->getBody()->voice as $item) {
             if (null === $language || (null !== $language && $language == $item['lang'])) {
                 $voices[] = (string) $item['command'];
             }
@@ -235,9 +212,7 @@ class Kajoa_Service_Nabaztag
     
     public function getTimezone()
     {
-        $response = $this->_sendCommand(
-            array('action' => 4)
-        );
+        $response = $this->_sendCommand(array('action' => 4));
         
         if ($response->isError()) {
             return false;
@@ -248,9 +223,7 @@ class Kajoa_Service_Nabaztag
     
     public function getVersion()
     {
-        $response = $this->_sendCommand(
-            array('action' => 8)
-        );
+        $response = $this->_sendCommand(array('action' => 8));
         
         if ($response->isError()) {
             return false;
@@ -265,14 +238,13 @@ class Kajoa_Service_Nabaztag
                 break;
             default:
                 return self::VERSION_UNKNOWN;
+                break;
         }
     }
         
     public function isSleeping()
     {
-        $response = $this->_sendCommand(
-            array('action' => 7)
-        );
+        $response = $this->_sendCommand(array('action' => 7));
 
         if ($response->isSuccessful()) {
             $body = $response->getBody();
@@ -303,15 +275,12 @@ class Kajoa_Service_Nabaztag
 
     public function setEarsPosition($leftEarPosition, $rightEarPosition)
     {
-        $leftEarPosition  = $this->_checkEarPosition($leftEarPosition);
-        $rightEarPosition = $this->_checkEarPosition($rightEarPosition);
-        
-        $response =  $this->_sendCommand(
-            array(
-                'posleft'  => $leftEarPosition,
-                'posright' => $rightEarPosition,
-            )
+        $params = array(
+            'posleft'  => $this->_checkEarPosition($leftEarPosition),
+            'posright' => $this->_checkEarPosition($rightEarPosition),
         );
+        
+        $response =  $this->_sendCommand($params);
         return $response->isSuccessful();    
     }
     
@@ -327,9 +296,7 @@ class Kajoa_Service_Nabaztag
     {
         $position = $this->_checkEarPosition($position);
                 
-        $response =  $this->_sendCommand(
-            array('posleft' => $position)
-        );
+        $response =  $this->_sendCommand(array('posleft' => $position));
         return $response->isSuccessful();    
     }
 
@@ -337,25 +304,19 @@ class Kajoa_Service_Nabaztag
     {
         $position = $this->_checkEarPosition($position);
         
-        $response = $this->_sendCommand(
-            array('posright' => $position)
-        );    
+        $response = $this->_sendCommand(array('posright' => $position));    
         return $response->isSuccessful();    
     }
     
     public function sleep()
     {
-        $response = $this->_sendCommand(
-            array('action' => 13)
-        );
+        $response = $this->_sendCommand(array('action' => 13));
         return $response->isSuccessful();    
     }
     
     public function wakeUp()
     {
-        $response = $this->_sendCommand(
-            array('action' => 14)
-        );
+        $response = $this->_sendCommand(array('action' => 14));
         return $response->isSuccessful();    
     }
 }

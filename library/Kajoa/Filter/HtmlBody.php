@@ -1,5 +1,6 @@
 <?php
-class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier {
+class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier
+{
     protected function _getCurrentDoctype()
     {
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('ViewRenderer');
@@ -32,7 +33,8 @@ class Kajoa_Filter_HtmlBody extends Kajoa_Filter_HtmlPurifier {
     {
         $options = array(
             'HTML.Doctype' => $this->_getCurrentDoctype(),
-            'HTML.Allowed' => 'address,a[href],b,blockquote,br,em,h1,h2,h3,h4,h5,hr,i,li,ol,p[style],pre,strong,ul',
+            'HTML.Allowed' => 'address,a[href],b,blockquote,br,em,h1,h2,h3,' .
+                              'h4,h5,hr,i,li,ol,p[style],pre,strong,ul'
         );
         
         if (!is_null($customOptions)) {

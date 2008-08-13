@@ -1,17 +1,18 @@
 <?php
-class Kajoa_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Container_Abstract
+class Kajoa_View_Helper_Menu_Container extends
+    Zend_View_Helper_Placeholder_Container_Abstract
 {
     protected $_attribs = array();
     
     protected function _buildUrl(array $data)
     {
-        if(isset($data['route'])) {
+        if (isset($data['route'])) {
             $route = $data['route'];
             unset($data['route']);
         } else {
             $route = 'default';
         }
-        if(isset($data['reset'])) {
+        if (isset($data['reset'])) {
             $reset = (bool) $data['reset'];
             unset($data['reset']);
         } else {
@@ -44,7 +45,7 @@ class Kajoa_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Cont
     
     public function getItem($id)
     {
-        foreach($this as $item) {
+        foreach ($this as $item) {
             if ($id == $item->id) {
                 return $item;
             }
@@ -68,7 +69,7 @@ class Kajoa_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Cont
         $this->resetAttribs();
         
         $keys = array_keys((array) $this);
-        foreach($keys as $key) {
+        foreach ($keys as $key) {
             unset($this->$key);
         }
     }
@@ -89,13 +90,13 @@ class Kajoa_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Cont
 
     public function setAttribs($attribs, $append = true)
     {
-        foreach($attribs as $name => $value) {
+        foreach ($attribs as $name => $value) {
             $this->setAttrib($name, $value, $append);
         }
     }
     
     public function setSelectedItem($id) {
-        foreach($this as $item) {
+        foreach ($this as $item) {
             $item->selected = false;
         }
         
@@ -109,16 +110,18 @@ class Kajoa_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Cont
                 : $this->getIndent();
         
         $result = '<ul';
-        foreach($this->_attribs as $name => $value) {
+        foreach ($this->_attribs as $name => $value) {
             $result .= ' ' . $name . '="' . $value . '"';
         }
         $result .= '>';
         
         foreach ($this as $item) {
                 if ($item->selected) {
-                    $result .= '<li class="selected"><span>' . $item->label . '</span></li>';
+                    $result .= '<li class="selected"><span>' . $item->label .
+                               '</span></li>';
                 } else {
-                    $result .= '<li><a href="' . $item->url . '">' . $item->label . '</a></li>';
+                    $result .= '<li><a href="' . $item->url . '">' .
+                               $item->label . '</a></li>';
                 }         
         }
         $result .= '</ul>';

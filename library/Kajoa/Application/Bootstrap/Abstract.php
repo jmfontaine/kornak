@@ -1,7 +1,8 @@
 <?php
 require_once 'Kajoa/Application/Bootstrap/Interface.php';
 
-abstract class Kajoa_Application_Bootstrap_Abstract implements Kajoa_Application_Bootstrap_Interface
+abstract class Kajoa_Application_Bootstrap_Abstract implements
+    Kajoa_Application_Bootstrap_Interface
 {
     const DEFAULT_KAJOA_PATH = '/usr/share/kajoa';
     
@@ -282,9 +283,7 @@ abstract class Kajoa_Application_Bootstrap_Abstract implements Kajoa_Application
         array_unshift($includePath, $this->getApplicationLibraryPath());
         $includePath = array_unique($includePath);
         
-        set_include_path(
-            implode(PATH_SEPARATOR, $includePath)
-        );
+        set_include_path(implode(PATH_SEPARATOR, $includePath));
     }
     
     protected function _setKajoaPath()

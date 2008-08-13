@@ -1,5 +1,6 @@
 <?php
-class Kajoa_View_Helper_BreadCrumb extends Zend_View_Helper_Placeholder_Container_Standalone
+class Kajoa_View_Helper_BreadCrumb extends
+    Zend_View_Helper_Placeholder_Container_Standalone
 {
     protected $_regKey = 'Kajoa_View_Helper_BreadCrumb';
 
@@ -29,7 +30,8 @@ class Kajoa_View_Helper_BreadCrumb extends Zend_View_Helper_Placeholder_Containe
      * @param int $setType
      * @return Kajoa_View_Helper_BreadCrumb
      */
-    public function breadCrumb($text = null, $url = null, $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND)
+    public function breadCrumb($text = null, $url = null,
+            $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND)
     {
         $data = $this->_createData($text, $url);
         
@@ -60,12 +62,9 @@ class Kajoa_View_Helper_BreadCrumb extends Zend_View_Helper_Placeholder_Containe
 
         $items = array();
         foreach ($this as $item) {
-            if(!empty($item->url)) {
-                $items[] = sprintf(
-                    '<a href="%s">%s</a>',
-                    $item->url,
-                    $this->_escape($item->text)
-                );
+            if (!empty($item->url)) {
+                $items[] = sprintf('<a href="%s">%s</a>', $item->url,
+                                   $this->_escape($item->text));
             } else {
                $items[] = $this->_escape($item->text);  
             }

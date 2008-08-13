@@ -13,12 +13,6 @@ class Kajoa_View_Helper_FormLink extends Zend_View_Helper_FormElement
             $label = '';
         }
 
-        $html = sprintf(
-            '<a%s>%s</a>',
-            $this->_htmlAttribs($attribs),
-            $label
-        );
-        
-        return $html;
+        return sprintf('<a%s>%s</a>', $this->_htmlAttribs($attribs), $label);;
     }
 }

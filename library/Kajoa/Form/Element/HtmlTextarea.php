@@ -8,8 +8,15 @@ class Kajoa_Form_Element_HtmlTextarea extends Zend_Form_Element_Textarea
         'mode'                              => 'textareas',
         'plugins'                           => 'nonbreaking,paste',
         'theme'                             => 'advanced',
-        'theme_advanced_buttons1'           => 'bold,italic,formatselect,removeformat,link,unlink,|,justifyleft,justifycenter,justifyright,justifyfull,|,bullist,numlist,outdent,indent',
-        'theme_advanced_buttons2'           => 'cut,copy,paste,pastetext,pasteword,|,undo,redo,|,blockquote,hr,sub,sup,nonbreaking,charmap',
+        'theme_advanced_buttons1'           => 'bold,italic,formatselect,' .
+                                               'removeformat,link,unlink,|,' .
+                                               'justifyleft,justifycenter,' .
+                                               'justifyright,justifyfull,|,' .
+                                               'bullist,numlist,outdent,indent',
+        'theme_advanced_buttons2'           => 'cut,copy,paste,pastetext,' .
+                                               'pasteword,|,undo,redo,|,' .
+                                               'blockquote,hr,sub,sup,' .
+                                               'nonbreaking,charmap',
         'theme_advanced_buttons3'           => '',
         'theme_advanced_buttons4'           => '',
         'theme_advanced_resize_horizontal'  => false,

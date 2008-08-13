@@ -1,6 +1,6 @@
 <?php
-class Kajoa_View_Helper_Menu  
-{  
+class Kajoa_View_Helper_Menu
+{
     protected $_registry;
 
     public function __construct()

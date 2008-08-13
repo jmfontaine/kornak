@@ -19,21 +19,22 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         return $this->_table->fetchNew();
     }
     
-    public function getAll(Kajoa_Model_Conditions $conditions = null, $fields = '*', $orderBy = null, $limit = null)
+    public function getAll(Kajoa_Model_Conditions $conditions = null,
+        $fields = '*', $orderBy = null, $limit = null)
     {
         $tableName = $this->_table->info(Zend_Db_Table_Abstract::NAME);
         $select = $this->_table->select();
         $select->from($tableName, $fields);
         
-        if(null !== $conditions) {
+        if (null !== $conditions) {
             $select->where($conditions);
         }
         
-        if(null !== $orderBy) {
+        if (null !== $orderBy) {
             $select->order($orderBy);
         }
         
-        if(null !== $limit) {
+        if (null !== $limit) {
             $select->limit($limit);
         }
         
@@ -45,14 +46,17 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         return $this->_table->find($id)->current();
     }
 
-    public function getPaginator($itemsPerPage = 10, $pageNumber = null, $selector = null)
+    public function getPaginator($itemsPerPage = 10, $pageNumber = null,
+        $selector = null)
     {
         if (null === $selector) {
             $selector = $this->_table->select();
         }
         
         if (!$selector instanceof Zend_Db_Select) {
-            throw new Kajoa_Exception('$selector must be a instance of the Zend_Db_Select class');
+            $message  = '$selector must be a instance of the Zend_Db_Select ';
+            $message .= 'class';
+            throw new Kajoa_Exception($message);
         }
         
         $paginator = new Zym_Paginate_DbTable($this->_table, $selector);

@@ -16,7 +16,7 @@ class Kajoa_Service_Nabaztag_Choregraphy
     public function __toString()
     {
         $stringCommands = array();
-        foreach($this->_commands as $command) {
+        foreach ($this->_commands as $command) {
             $stringCommands[] = implode(',', array_values($command));
         }
         $string = $this->_tempo . ',' . implode(',', $stringCommands);
@@ -25,7 +25,14 @@ class Kajoa_Service_Nabaztag_Choregraphy
     
     public function addCommand($type, $time, $firstValue, $secondValue, $thirdValue, $fourthValue)
     {
-        $this->_commands[] = array('$time' => $time, 'type' => $type, 'firstValue' => $firstValue, 'secondValue' => $secondValue, 'thirdValue' => $thirdValue, 'fourthValue' => $fourthValue,);
+        $this->_commands[] = array(
+            '$time'       => $time,
+            'type'        => $type,
+            'firstValue'  => $firstValue,
+            'secondValue' => $secondValue,
+            'thirdValue'  => $thirdValue,
+            'fourthValue' => $fourthValue,
+        );
     }
     
     public function addEarCommand($time, $ear, $angle, $rotation)

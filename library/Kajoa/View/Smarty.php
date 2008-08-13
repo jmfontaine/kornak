@@ -10,10 +10,11 @@ class Kajoa_View_Smarty extends Zend_View_Abstract
         $this->_smarty = new Smarty();
 
         if (!array_key_exists('compile_dir', $config)) {
-            throw new Exception('compileDir must be set in $config for ' . get_class($this));
+            throw new Exception('compileDir must be set in $config for ' . 
+                get_class($this));
         }
 
-        foreach($config as $name => $value) {
+        foreach ($config as $name => $value) {
             $this->_smarty->$name = $value;
         }
         
@@ -45,7 +46,7 @@ class Kajoa_View_Smarty extends Zend_View_Abstract
         $script     = func_get_arg(0);
         $scriptPath = '';
         $paths      = $this->getScriptPaths();
-        foreach($paths as $path) {
+        foreach ($paths as $path) {
             $subString = substr($scriptPath, 0, strlen($path));
             if ($path == $subString) {
                 $scriptPath = $subString; 

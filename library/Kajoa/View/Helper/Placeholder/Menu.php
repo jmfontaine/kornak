@@ -1,17 +1,18 @@
 <?php
-class Kajoa_View_Helper_Placeholder_Menu extends Zend_View_Helper_Placeholder_Container_Abstract
+class Kajoa_View_Helper_Placeholder_Menu extends
+    Zend_View_Helper_Placeholder_Container_Abstract
 {
     protected $_attribs = array();
     
     protected function _buildUrl(array $data)
     {
-        if(isset($data['route'])) {
+        if (isset($data['route'])) {
             $route = $data['route'];
             unset($data['route']);
         } else {
             $route = 'default';
         }
-        if(isset($data['reset'])) {
+        if (isset($data['reset'])) {
             $reset = (bool) $data['reset'];
             unset($data['reset']);
         } else {
@@ -49,7 +50,7 @@ class Kajoa_View_Helper_Placeholder_Menu extends Zend_View_Helper_Placeholder_Co
     
     public function getItem($id)
     {
-        foreach($this as $item) {
+        foreach ($this as $item) {
             if ($id == $item->id) {
                 return $item;
             }
@@ -74,7 +75,7 @@ class Kajoa_View_Helper_Placeholder_Menu extends Zend_View_Helper_Placeholder_Co
     }
     
     public function setSelectedItem($id) {
-        foreach($this as $item) {
+        foreach ($this as $item) {
             $item->selected = false;
         }
         
@@ -89,7 +90,7 @@ class Kajoa_View_Helper_Placeholder_Menu extends Zend_View_Helper_Placeholder_Co
                 : $this->getIndent();
         
         $result = '<ul';
-        foreach($this->_attribs as $name => $value) {
+        foreach ($this->_attribs as $name => $value) {
             $result .= ' ' . $name . '="' . $value . '"';
         }
         $result .= '>';

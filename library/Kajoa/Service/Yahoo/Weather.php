@@ -16,12 +16,7 @@ class Kajoa_Service_Yahoo_Weather
             $temperatureUnit = 'f';
         }
     
-        $url = sprintf(
-            self::URL,
-            $code,
-            $temperatureUnit
-        );    
-    
+        $url        = sprintf(self::URL, $code, $temperatureUnit);    
         $httpClient = new Zend_Http_Client($url);
         $response   = $httpClient->request();
 

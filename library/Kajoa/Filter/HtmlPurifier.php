@@ -16,7 +16,8 @@ class Kajoa_Filter_HtmlPurifier implements Zend_Filter_Interface
             }
         }
         if (!$cachePathFound) {
-            $options['Cache.SerializerPath'] = Application_Bootstrap::getInstance()->getTempPath() . '/htmlpurifier';
+            $tempPath = Application_Bootstrap::getInstance()->getTempPath();
+            $options['Cache.SerializerPath'] = $tempPath . '/htmlpurifier';
         }
         
         // Define HTMLPurifier config

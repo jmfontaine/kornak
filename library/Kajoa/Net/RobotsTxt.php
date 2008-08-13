@@ -26,19 +26,15 @@ class Kajoa_Net_RobotsTxt
     protected function _checkAllowValue($value, $lineNumber)
     {
         // Disallow is not part of the original specification
-        $this->_addError(
-            "'Allow' is not a valid directive",
-            $lineNumber,
-            self::VERSION_ORIGINAL_SPECIFICATION
-        );
+        $this->_addError("'Allow' is not a valid directive", $lineNumber,
+                         self::VERSION_ORIGINAL_SPECIFICATION);
     
         // * is not a standard value for Allow directive
         if ('*' == $value) {
-            $this->_addError(
-                "'*' is not a standard value for Allow directive, value '/' substituted",
-                $lineNumber,
-                self::VERSION_NON_STANDARD_EXTENSIONS
-            );
+            $message  = "'*' is not a standard value for Allow directive,";
+            $message .= " value '/' substituted";
+            $this->_addError($message, $lineNumber,
+                             self::VERSION_NON_STANDARD_EXTENSIONS);
             return '/';
         }
 
@@ -48,20 +44,16 @@ class Kajoa_Net_RobotsTxt
     protected function _checkCrawlDelayValue($value, $lineNumber)
     {
         // Crawl-delay is not part of the original specification
-        $this->_addError(
-            "'Crawl-delay' is not a valid directive",
-            $lineNumber,
-            self::VERSION_ORIGINAL_SPECIFICATION
-        );
+        $this->_addError("'Crawl-delay' is not a valid directive", $lineNumber,
+                         self::VERSION_ORIGINAL_SPECIFICATION);
     
         // Value of Crawl-delay directive should be an integer
         $validator = new Zend_Validate_Int();
         if (!$validator->isValid($value)) {
-            $this->_addError(
-                'Value of Crawl-delay directive should be an integer, ignoring the directive',
-                $lineNumber,
-                self::VERSION_NON_STANDARD_EXTENSIONS
-            );
+            $message  = 'Value of Crawl-delay directive should be an integer, ';
+            $message .= 'ignoring the directive';
+            $this->_addError($message, $lineNumber,
+                             self::VERSION_NON_STANDARD_EXTENSIONS);
             return false;
         }
 
@@ -72,11 +64,9 @@ class Kajoa_Net_RobotsTxt
     {
         // * is not a standard value for Disallow directive
         if ('*' == $value) {
-            $this->_addError(
-                "'*' is not a standard value for Disallow directive, value '/' substituted",
-                $lineNumber,
-                self::VERSION_ALL_VERSIONS
-            );
+            $message  = "'*' is not a standard value for Disallow directive, ";
+            $message .= "value '/' substituted";
+            $this->_addError($message, $lineNumber, self::VERSION_ALL_VERSIONS);
             return '/';
         }
 
@@ -86,11 +76,8 @@ class Kajoa_Net_RobotsTxt
     protected function _checkSitemapValue($value, $lineNumber)
     {
         // Sitemap is not part of the original specification
-        $this->_addError(
-            "'Sitemap' is not a valid directive",
-            $lineNumber,
-            self::VERSION_ORIGINAL_SPECIFICATION
-        );
+        $this->_addError("'Sitemap' is not a valid directive", $lineNumber,
+                         self::VERSION_ORIGINAL_SPECIFICATION);
     
         // Value should be a the complete URL to the sitemap
         $urlParts   = @parse_url($value);
@@ -100,19 +87,18 @@ class Kajoa_Net_RobotsTxt
                       && !empty($urlParts['path']);
         if ($isUrlValid) {
             require_once 'Zend/Validate/Hostname.php';
-            $validator  = new Zend_Validate_Hostname(
-                Zend_Validate_Hostname::ALLOW_DNS | Zend_Validate_Hostname::ALLOW_IP
-            );
+            $options    = Zend_Validate_Hostname::ALLOW_DNS |
+                          Zend_Validate_Hostname::ALLOW_IP;
+            $validator  = new Zend_Validate_Hostname($options);
             $isUrlValid = $validator->isValid($urlParts['host']);
             unset($validator);
         }
                       
         if (!$isUrlValid) {
-            $this->_addError(
-                'Value of Sitemap directive should be a the complete URL to the sitemap',
-                $lineNumber,
-                self::VERSION_NON_STANDARD_EXTENSIONS
-            );
+            $message  = 'Value of Sitemap directive should be a the complete ';
+            $message .= 'URL to the sitemap'; 
+            $this->_addError($message, $lineNumber,
+                             self::VERSION_NON_STANDARD_EXTENSIONS);
         }
 
         return $value;
@@ -120,18 +106,12 @@ class Kajoa_Net_RobotsTxt
     
     protected function _decodePath($path)
     {
-        $function = create_function(
-            '$matches',
-            'return "%2f" == strtolower($matches[0]) ? $matches[0] : urldecode($matches[0]);'
-        );
-    
-        $path = preg_replace_callback(
-            '/%[0-9A-Fa-f]{2}/',
-            $function,
-            $path
-        );    
+        $code  = 'return "%2f" == strtolower($matches[0]) ? $matches[0] : ';
+        $code .= 'urldecode($matches[0]);';
         
-        return $path;
+        $function = create_function('$matches', $code);
+    
+        return preg_replace_callback('/%[0-9A-Fa-f]{2}/', $function, $path);    
     }
     
     protected function _getDirectives($userAgent)
@@ -139,8 +119,8 @@ class Kajoa_Net_RobotsTxt
         $directives          = array();
         $matchingRecordFound = false;
     
-        foreach($this->_records as $record) {
-            foreach($record as $line) {
+        foreach ($this->_records as $record) {
+            foreach ($record as $line) {
                 if ('user-agent' == strtolower($line['name'])) {
                     if (false !== stripos($line['value'], $userAgent)) {
                         $matchingRecordFound = true; 
@@ -177,7 +157,7 @@ class Kajoa_Net_RobotsTxt
         // Iterate through the lines
         $record                     = array();
         $nonUserAgentDirectiveFound = false;
-        foreach($lines as $lineNumber => $line) {
+        foreach ($lines as $lineNumber => $line) {
         
             // Suppress comments
             $position = strpos($line, '#');
@@ -199,11 +179,8 @@ class Kajoa_Net_RobotsTxt
             // Extract the directive name and value
             $position = strpos($line, ':');
             if (false === $position) {
-                $this->_addError(
-                    "Bad format for line '$line'",
-                    $lineNumber,
-                    self::VERSION_ALL_VERSIONS
-                );            
+                $this->_addError("Bad format for line '$line'", $lineNumber,
+                                 self::VERSION_ALL_VERSIONS);            
                 continue;
             }        
 
@@ -215,11 +192,10 @@ class Kajoa_Net_RobotsTxt
             
             // All User-agent directives must appear before any other directives
             if ('User-agent' == $directiveName && $nonUserAgentDirectiveFound) {
-                $this->_addError(
-                    'All User-agent directives must appear before any other directives, ignoring it',
-                    $lineNumber,
-                    self::VERSION_ALL_VERSIONS
-                );
+                $message  = 'All User-agent directives must appear before any ';
+                $message .= 'other directives, ignoring it';
+                $this->_addError($message, $lineNumber,
+                                 self::VERSION_ALL_VERSIONS);
                 continue;            
             }
 
@@ -253,11 +229,9 @@ class Kajoa_Net_RobotsTxt
                     break;
                     
                 default:
-                    $this->_addError(
-                        "'$directiveName' is not a valid directive",
-                        $lineNumber,
-                        self::VERSION_ALL_VERSIONS
-                    );
+                    $this->_addError("'$directiveName' is not a valid directive",
+                                     $lineNumber, self::VERSION_ALL_VERSIONS);
+                    break;
             }
             
             // Ignore the directive if the value is invalide
@@ -296,7 +270,7 @@ class Kajoa_Net_RobotsTxt
     {
         $crawlDelay = 0;
         $directives = $this->getApplicableDirectives($userAgent);
-        foreach($directives as $directive) {
+        foreach ($directives as $directive) {
             // Ignore directive other than Allow and Disallow
             if ('Crawl-delay' != $directive['name']) {
                 continue;    
@@ -311,7 +285,7 @@ class Kajoa_Net_RobotsTxt
     public function getErrors($version = self::VERSION_ORIGINAL_SPECIFICATION)
     {
         $errors = array();
-        foreach($this->_errors as $error) {
+        foreach ($this->_errors as $error) {
             if ($version & $error['version']) {
                 $errors[] = $error;
             }
@@ -335,15 +309,17 @@ class Kajoa_Net_RobotsTxt
         $path = $this->_decodePath($path);
             
         $directives = $this->getApplicableDirectives($userAgent);
-        foreach($directives as $directive) {
+        foreach ($directives as $directive) {
             // Ignore directive other than Allow and Disallow
-            if ('Allow' != $directive['name'] && 'Disallow' != $directive['name']) {
+            if ('Allow' != $directive['name'] &&
+                'Disallow' != $directive['name']) {
                 continue;    
             }
             
             // In the first specification an empty value for the Disallow
             // directive meant that access to all pages is allowed
-            if ('Disallow' == $directive['name'] && empty($directive['value'])) {
+            if ('Disallow' == $directive['name'] &&
+                empty($directive['value'])) {
                 return true;
             }
 
@@ -363,11 +339,13 @@ class Kajoa_Net_RobotsTxt
     public function isValid($version = self::VERSION_ORIGINAL_SPECIFICATION)
     {
         if (self::VERSION_ALL_VERSIONS == $version) {
-            throw new Exception('VERSION_ALL_VERSIONS constant can not be used in this function');
+            $message  = 'VERSION_ALL_VERSIONS constant can not be used in ';
+            $message .= 'this function';
+            throw new Exception($message);
         }
     
         $valid = true;
-        foreach($this->_errors as $error) {
+        foreach ($this->_errors as $error) {
             if ($version & $error['version']) {
                 $valid = false;
                 break;            

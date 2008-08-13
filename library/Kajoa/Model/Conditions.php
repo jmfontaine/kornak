@@ -49,11 +49,11 @@ class Kajoa_Model_Conditions
     
     public function toSql($dbAdapter = null)
     {
-        if(null === $dbAdapter) {
+        if (null === $dbAdapter) {
             $dbAdapter = Zend_Db_Table_Abstract::getDefaultAdapter();
         }
         $sql = '';
-        foreach($this->_conditions as $condition) {
+        foreach ($this->_conditions as $condition) {
             switch($condition['type']) {
                 case self::TYPE_NONE:
                     $type = '';
@@ -69,6 +69,7 @@ class Kajoa_Model_Conditions
             
                 default:
                     throw new Kajoa_Exception('Invalid type');
+                    break;
             }
             
             if ($condition['operator'] == '=' && $condition['value'] === null) {
@@ -82,20 +83,22 @@ class Kajoa_Model_Conditions
                     case '<=':
                     case '<>':
                         $clause = "$type {$condition['property']} {$condition['operator']} ? ";
-                        $sql .= $dbAdapter->quoteInto($clause,  $condition['value']);
+                        $sql .= $dbAdapter->quoteInto($clause, $condition['value']);
                         break;
                     
                     case 'in':
                         $quotedValues = array();
-                        foreach($condition['value'] as $value) {
+                        foreach ($condition['value'] as $value) {
                             $quotedValues[] = $dbAdapter->quote($value);
                         }
                         
-                        $sql .= "$type {$condition['property']} IN (" . implode(',', $quotedValues) . ')';
+                        $sql .= "$type {$condition['property']} IN (" .
+                                implode(',', $quotedValues) . ')';
                         break;
                     
                     default:
                         throw new Kajoa_Exception('Invalid operator');
+                        break;
                 }                
             }
         }

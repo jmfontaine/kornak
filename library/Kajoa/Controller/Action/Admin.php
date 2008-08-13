@@ -5,7 +5,8 @@ class Kajoa_Controller_Action_Admin extends Kajoa_Controller_Action
     {
         $auth = Zend_Auth::getInstance();
         if (!$auth->hasIdentity()) {
-            $this->_helper->redirector->gotoRoute(array('action' => 'login'), 'adminAuth');
+            $this->_helper->redirector->gotoRoute(array('action' => 'login'),
+                'adminAuth');
         }
     }
 
@@ -15,11 +16,11 @@ class Kajoa_Controller_Action_Admin extends Kajoa_Controller_Action
         
         $this->_helper->layout->setLayout('admin/main');
 
-        $this->view->headMeta()->appendName('Author'      , 'Kanopée');
+        $this->view->headMeta()->appendName('Author', 'Kanopée');
         $this->view->headMeta()->appendName('Content-Type', 'text/html; charset=UTF-8');
-        $this->view->headMeta()->appendName('Generator'   , 'Kajoa');
+        $this->view->headMeta()->appendName('Generator', 'Kajoa');
         $this->view->headMeta()->appendName('MSSmartTagsPreventParsing', 'true');
-        $this->view->headMeta()->appendName('Robots'      , 'noindex,nofollow');
+        $this->view->headMeta()->appendName('Robots', 'noindex,nofollow');
         
         $this->view->headTitle('Kajoa admin');
 

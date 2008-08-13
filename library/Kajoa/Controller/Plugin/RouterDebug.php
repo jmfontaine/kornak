@@ -66,18 +66,18 @@ class Kajoa_Controller_Plugin_RouterDebug extends Zend_Controller_Plugin_Abstrac
     public function postDispatch(Zend_Controller_Request_Abstract $request)
     {
         $this->_writeStageHeader('Post dispatch');
-        $this->_dumpVariable('module'    , $request->getModuleName());        
+        $this->_dumpVariable('module', $request->getModuleName());        
         $this->_dumpVariable('controller', $request->getControllerName());        
-        $this->_dumpVariable('action'    , $request->getActionName());
+        $this->_dumpVariable('action', $request->getActionName());
         $this->_writeStageFooter();
     }
     
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
         $this->_writeStageHeader('Pre dispatch');
-        $this->_dumpVariable('module'    , $request->getModuleName());        
+        $this->_dumpVariable('module', $request->getModuleName());        
         $this->_dumpVariable('controller', $request->getControllerName());        
-        $this->_dumpVariable('action'    , $request->getActionName());
+        $this->_dumpVariable('action', $request->getActionName());
         $this->_writeStageFooter();
     }
     

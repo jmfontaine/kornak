@@ -11,8 +11,8 @@ class Kajoa_Controller_Action extends Zend_Controller_Action
 
     protected function _addErrorMessages($rules)
     {
-        foreach($rules as $rule) {
-            foreach($rule as $message) {
+        foreach ($rules as $rule) {
+            foreach ($rule as $message) {
                 $this->_addErrorMessage($message);
             }
         }
@@ -56,7 +56,9 @@ class Kajoa_Controller_Action extends Zend_Controller_Action
      * @param array $invokeArgs Any additional invocation arguments
      * @return void
      */
-    public function __construct(Zend_Controller_Request_Abstract $request, Zend_Controller_Response_Abstract $response, array $invokeArgs = array())
+    public function __construct(Zend_Controller_Request_Abstract $request,
+        Zend_Controller_Response_Abstract $response,
+        array $invokeArgs = array())
     {
         parent::__construct($request, $response, $invokeArgs);
 
@@ -69,9 +71,9 @@ class Kajoa_Controller_Action extends Zend_Controller_Action
         
         $this->_helper->layout->setLayout('site/main');
 
-        $this->view->headMeta()->appendName('Author'      , 'Kanopée');
+        $this->view->headMeta()->appendName('Author', 'Kanopée');
         $this->view->headMeta()->appendName('Content-Type', 'text/html; charset=UTF-8');
-        $this->view->headMeta()->appendName('Generator'   , 'Kajoa');
+        $this->view->headMeta()->appendName('Generator', 'Kajoa');
         $this->view->headMeta()->appendName('MSSmartTagsPreventParsing', 'true');
         
         $this->view->headLink()->appendStylesheet('/gui/site/css/reset.css');  
