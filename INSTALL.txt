@@ -8,7 +8,8 @@ to your PHP include_path.
 SYSTEM REQUIREMENTS
 -------------------
 
-Kajoa requires PHP 5.1.4 or later and works best with 5.2.3 or later.
+Kajoa requires Zend Framework 1.6.0RC2 and PHP 5.1.4 or later. Please note that
+it works best with PHP 5.2.3 or later.
 
 CONFIGURING THE INCLUDE PATH
 ----------------------------
