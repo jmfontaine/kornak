@@ -1,5 +1,7 @@
 <?php
-class Kaoja_Loader extends Zend_Loader
+require_once 'Zend/Loader.php';
+
+class Kajoa_Loader extends Zend_Loader
 {
     public static function autoload($class)
     {

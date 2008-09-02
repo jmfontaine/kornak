@@ -25,7 +25,7 @@ class AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Kaoja');
+        $suite = new PHPUnit_Framework_TestSuite('Kajoa');
 
         $suite->addTest(Kajoa_AllTests::suite());
 
