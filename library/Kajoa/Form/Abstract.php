@@ -19,7 +19,6 @@ class Kajoa_Form_Abstract extends Zend_Form
     
     public function __construct ($options = null)
     {
-        $bootstrap = Application_Bootstrap::getInstance();
         $this->addPrefixPath('Kajoa_Form', 'Kajoa/Form');
 
         $this->setMethod('post')
