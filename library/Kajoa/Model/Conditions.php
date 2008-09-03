@@ -9,7 +9,7 @@ class Kajoa_Model_Conditions
 
     protected function _add($property, $value, $operator, $type)
     {
-        $validOperators = array('=', '>', '>=', '<', '<=', '!=', 'in');
+        $validOperators = array('=', '>', '>=', '<', '<=', '!=', 'in', 'like');
         if (!in_array($operator, $validOperators)) {
             throw new Kajoa_Exception('Invalid operator');
         }
@@ -82,10 +82,12 @@ class Kajoa_Model_Conditions
                     case '<':
                     case '<=':
                     case '<>':
-                        $clause = "$type {$condition['property']} {$condition['operator']} ? ";
-                        $sql .= $dbAdapter->quoteInto($clause, $condition['value']);
+                    case 'like':
+                        $operator = strtoupper($condition['operator']);
+                        $clause   = "$type {$condition['property']} $operator ? ";
+                        $sql     .= $dbAdapter->quoteInto($clause,  $condition['value']);
                         break;
-                    
+                                            
                     case 'in':
                         $quotedValues = array();
                         foreach ($condition['value'] as $value) {
