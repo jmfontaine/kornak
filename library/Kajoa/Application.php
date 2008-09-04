@@ -162,7 +162,7 @@ class Kajoa_Application
         return $this->_applicationSettings->path->root;
     }
 
-    public function getInstance()
+    public static function getInstance()
     {
         static $instance = null;
         if (null === $instance) {
