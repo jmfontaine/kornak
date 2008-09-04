@@ -142,6 +142,15 @@ class Kajoa_Application
         return $this->_applicationSettings->path->application;
     }
 
+    public function getAspect($name)
+    {
+        if (array_key_exists($name, $this->_aspects)) {
+            return $this->_aspects[$name];
+        } else {
+            return false;
+        }
+    }
+    
     public function getConfigPath()
     {
         return $this->_applicationSettings->path->config;
