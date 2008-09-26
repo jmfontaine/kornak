@@ -23,7 +23,7 @@ class Kajoa_Application
         'production' => array(
             'path'    => array(
                 'application' => '../application',
-                'config'      => '../config',
+                'config'      => '../application/config',
                 'data'        => '../data',
                 'public'      => '../public',
                 'root'        => '../',
@@ -207,9 +207,13 @@ class Kajoa_Application
         return $this;
     }
     
-    public static function run($settings = '../config/settings.ini',
+    public static function run($settings = null,
         $environment = self::ENVIRONMENT_PRODUCTION)
     {
+        if (null === $settings) {
+            $settings = '../application/config/settings.ini';
+        }
+        
         $instance = self::getInstance();
         $instance->setEnvironment($environment);
         $instance->loadSettings($settings);
