@@ -8,8 +8,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
     define('PHPUnit_MAIN_METHOD', 'Kajoa_AllTests::main');
 }
 
-require_once 'Kajoa/Model/AllTests.php';
-require_once 'Kajoa/Service/AllTests.php';
+require_once 'Kajoa/ApplicationTest.php';
 require_once 'Kajoa/CryptTest.php';
 
 class Kajoa_AllTests
@@ -23,8 +22,7 @@ class Kajoa_AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Kajoa');
 
-        $suite->addTest(Kajoa_Model_AllTests::suite());
-        $suite->addTest(Kajoa_Service_AllTests::suite());
+        $suite->addTestSuite('Kajoa_ApplicationTest');
         $suite->addTestSuite('Kajoa_CryptTest');
         
         return $suite;

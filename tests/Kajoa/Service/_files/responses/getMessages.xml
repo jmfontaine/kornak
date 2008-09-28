@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rsp>
-    <listreceivedmsg nb="1"/>
-    <msg from="toto" title="my message" date="today 11:59" url="broad/001/948.mp3"/>
-</rsp>
