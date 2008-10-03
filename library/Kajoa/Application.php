@@ -25,6 +25,7 @@ class Kajoa_Application
                 'application' => '../application',
                 'config'      => '../application/config',
                 'data'        => '../data',
+                'library'     => '../library',
                 'public'      => '../public',
                 'root'        => '../',
                 'temp'        => '../temp',
@@ -160,6 +161,11 @@ class Kajoa_Application
     {
         return $this->_applicationSettings->path->data;
     }
+
+    public function getLibraryPath()
+    {
+        return $this->_applicationSettings->path->library;
+    }
     
     public function getEnvironment()
     {
@@ -217,6 +223,9 @@ class Kajoa_Application
         $instance = self::getInstance();
         $instance->setEnvironment($environment);
         $instance->loadSettings($settings);
+        
+        set_include_path($instance->getLibraryPath() . PATH_SEPARATOR . get_include_path());
+        
         $instance->dispatch();
     }
     
