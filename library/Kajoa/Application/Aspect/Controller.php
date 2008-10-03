@@ -5,12 +5,67 @@ require_once 'Zend/Controller/Front.php';
 
 class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstract
 {
+    protected $_defaultSettings = array(
+        'production'  => array(
+            'routesUseLocales' => false,
+            'routesFilePath'   => 'config/routes.ini',
+        ),
+        'testing'     => array(),
+        'development' => array(),
+    );
+    
+    protected function _loadRoutes()
+    {
+        $frontController = Zend_Controller_Front::getInstance();
+
+        // KLUDGE: Workaround a Zend Framework bug
+        $request = new Zend_Controller_Request_Http();
+        $frontController->setRequest($request);
+        
+        $router = $frontController->getRouter();
+        
+        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        $routesFilePath  = $applicationPath . '/' . $this->getSetting('routesFilePath');
+        $routesConfig    = new Zend_Config_Ini($routesFilePath, null, true);
+
+        if (true == $this->getSetting('routesUseLocales')) {
+            foreach ($routesConfig as $locale => $routes) {
+                // Handle hostname if present
+                $hostnameRoute = null;
+                if (isset($routes->hostname)) {
+                    $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
+                        $routes->hostname->route,
+                        array('locale' => $locale)
+                    );
+                    $router->addRoute('full-' . $locale, $hostnameRoute);
+                    unset($routes->hostname);
+                }
+                
+                foreach ($routes as $name => $values) {
+                    $class = (isset($values->type)) ? $values->type : 'Zend_Controller_Router_Route';
+                    Zend_Loader::loadClass($class);
+    
+                    $route = call_user_func(array($class, 'getInstance'), $values);
+                    $router->addRoute($name . '-' . $locale, $route);
+                    
+                    if (null !== $hostnameRoute) {
+                        $router->addRoute('full-' . $name . '-' . $locale, $hostnameRoute->chain($route));
+                    }
+                }
+            }
+        } else {
+            $router->addConfig($routesConfig);
+        }
+    }
+    
     public function init()
     {
-        $path = Kajoa_Application::getInstance()->getApplicationPath();
+        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        
+        $this->_loadRoutes();
         
         $frontController = Zend_Controller_Front::getInstance();
-        $frontController->addModuleDirectory($path . '/modules')
+        $frontController->addModuleDirectory($applicationPath . '/modules')
                         ->dispatch();
     }    
 }
