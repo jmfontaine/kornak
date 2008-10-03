@@ -9,9 +9,12 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
         'production'  => array(
             'routesUseLocales' => false,
             'routesFilePath'   => 'config/routes.ini',
+            'throwException'   => false,
         ),
         'testing'     => array(),
-        'development' => array(),
+        'development' => array(
+            'throwException' => true,
+        ),
     );
     
     protected function _loadRoutes()
@@ -21,6 +24,8 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
         // KLUDGE: Workaround a Zend Framework bug
         $request = new Zend_Controller_Request_Http();
         $frontController->setRequest($request);
+        
+        $frontController->throwExceptions($this->getSetting('throwException'));
         
         $router = $frontController->getRouter();
         
