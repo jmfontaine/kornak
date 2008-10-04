@@ -127,7 +127,7 @@ class Kajoa_Application
                 $aspectSettings = $settings->$name;
             }
             
-            $this->_aspects[$name] = new $class($aspectSettings, $environment);
+            $this->_aspects[$name] = new $class($aspectSettings, $environment, $this);
         }
     }
     
@@ -135,6 +135,10 @@ class Kajoa_Application
     {
         foreach ($this->_aspects as $aspect) {
             $aspect->init();
+        }
+        
+        foreach ($this->_aspects as $aspect) {
+            $aspect->run();
         }
     }
     
@@ -199,6 +203,11 @@ class Kajoa_Application
     public function getTempPath()
     {
         return $this->_applicationSettings->path->temp;
+    }
+    
+    public function hasAspect($name)
+    {
+        return array_key_exists($name, $this->_aspects);
     }
     
     public function loadSettings($filepath)

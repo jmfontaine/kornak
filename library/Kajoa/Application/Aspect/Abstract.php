@@ -3,18 +3,25 @@ require_once 'Kajoa/Exception.php';
 
 abstract class Kajoa_Application_Aspect_Abstract
 {
-    protected $_settings;
+    protected $_application;
     protected $_defaultSettings = array(
         'production'  => array(),
         'testing'     => array(),
         'development' => array(),
     );
     protected $_environment;
+    protected $_settings;
     
-    public function __construct($settings, $environment)
+    public function __construct($settings, $environment, $application)
     {
         $this->setEnvironment($environment);
         $this->setSettings($settings);
+        $this->setApplication($application);
+    }
+    
+    public function getApplication()
+    {
+        return $this->_application;
     }
     
     public function getSetting($name)
@@ -48,7 +55,20 @@ abstract class Kajoa_Application_Aspect_Abstract
         return $this->_environment;
     }
     
-    public abstract function init();
+    public function init()
+    {
+        
+    }
+
+    public function run()
+    {
+        
+    }
+    
+    public function setApplication($application)
+    {
+        $this->_application = $application;
+    }
     
     public function setSettings($settings)
     {

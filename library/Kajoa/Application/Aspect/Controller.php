@@ -1,5 +1,4 @@
 <?php
-require_once 'Kajoa/Application.php';
 require_once 'Kajoa/Application/Aspect/Abstract.php';
 require_once 'Zend/Controller/Front.php';
 
@@ -29,7 +28,7 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
         
         $router = $frontController->getRouter();
         
-        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        $applicationPath = $this->getApplication()->getApplicationPath();
         $routesFilePath  = $applicationPath . '/' . $this->getSetting('routesFilePath');
         $routesConfig    = new Zend_Config_Ini($routesFilePath, null, true);
 
@@ -65,12 +64,16 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
     
     public function init()
     {
-        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        $applicationPath = $this->getApplication()->getApplicationPath();
         
         $this->_loadRoutes();
         
         $frontController = Zend_Controller_Front::getInstance();
-        $frontController->addModuleDirectory($applicationPath . '/modules')
-                        ->dispatch();
+        $frontController->addModuleDirectory($applicationPath . '/modules');
+    }    
+
+    public function run()
+    {
+        Zend_Controller_Front::getInstance()->dispatch();
     }    
 }
