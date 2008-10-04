@@ -1,7 +1,7 @@
 <?php
 require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Filter/Word/DashToCamelCase.php';
-require_once 'Zend/Loader.php';
+require_once 'Zend/Loader/PluginLoader.php';
 
 class Kajoa_Application
 {
@@ -36,8 +36,8 @@ class Kajoa_Application
     );
     protected $_environment = self::ENVIRONMENT_PRODUCTION;
     protected $_settings;
-
-    public function _getDefaultApplicationSettings($environment)
+    
+    protected function _getDefaultApplicationSettings($environment)
     {
         $defaultSettings = $this->_defaultApplicationSettings[$environment];
         
@@ -49,7 +49,7 @@ class Kajoa_Application
         return $defaultSettings;
     }
     
-    public function _getDefaultAspects($environment)
+    protected function _getDefaultAspects($environment)
     {
         $defaultAspects = $this->_defaultAspects[$environment];
         
@@ -113,21 +113,23 @@ class Kajoa_Application
     
     protected function _loadAspects($settings)
     {
+        $loader = new Zend_Loader_PluginLoader();
+        $loader->addPrefixPath('Kajoa_Application_Aspect_', 'Kajoa/Application/Aspect/');
+        $loader->addPrefixPath('Application_Aspect_', $this->getApplicationPath() . '/aspects/');
+        
         $environment = $this->getEnvironment();
         $filter      = new Zend_Filter_Word_DashToCamelCase();
 
         $aspects = explode(',', $settings->order);
         foreach($aspects as $name) {
-            $filteredName = $filter->filter(trim($name));
-            $class = 'Kajoa_Application_Aspect_' . $filteredName;
-            Zend_Loader::loadClass($class);
+            $className = $loader->load($name);
             
             $aspectSettings = null;
             if (isset($settings->$name)) {
                 $aspectSettings = $settings->$name;
             }
             
-            $this->_aspects[$name] = new $class($aspectSettings, $environment, $this);
+            $this->_aspects[$name] = new $className($aspectSettings, $environment, $this);
         }
     }
     
