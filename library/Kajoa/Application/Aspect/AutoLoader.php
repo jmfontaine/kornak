@@ -6,7 +6,7 @@ class Kajoa_Application_Aspect_AutoLoader extends Kajoa_Application_Aspect_Abstr
 {
     protected $_defaultSettings = array(
         'production'  => array(
-            'class' => 'Zend_Loader',
+            'class' => 'Kajoa_Loader',
         ),
         'testing'     => array(),
         'development' => array(),
