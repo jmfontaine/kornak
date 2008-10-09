@@ -5,9 +5,11 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
 {
     protected $_table;
     
-    public function __construct()
+    public function __construct($options = array())
     {
-        $options = array('name' => strtolower(get_class($this)));
+        if (empty($options['name'])) {
+            $options['name'] = strtolower(get_class($this));
+        }
         $this->_table = new Kajoa_Db_Table($options);
     }
     
@@ -41,6 +43,18 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         }
         
         return $this->_table->fetchAll($select);
+    }
+
+    public function getOne(Kajoa_Model_Conditions $conditions = null,
+        $fields = '*')
+    {
+        $result = $this->getAll($conditions, $fields, null, '1');
+        
+        if (!empty($result)) {
+            return $result->current();
+        } else {
+            return $result;
+        }
     }
     
     public function getById($id)
@@ -127,6 +141,11 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         }
         
         return $this->_table->fetchAll($select);
+    }
+    
+    public function getTable()
+    {
+        return $this->_table;
     }
     
     public function remove(Kajoa_Model_Conditions $conditions)

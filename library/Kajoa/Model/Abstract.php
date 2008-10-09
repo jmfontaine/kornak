@@ -10,6 +10,9 @@ abstract class Kajoa_Model_Abstract
     
     abstract public function getById($id);
     
+    abstract public function getOne(Kajoa_Model_Conditions $conditions = null,
+        $fields = '*');
+    
     abstract public function getPaginator($itemsPerPage = 10,
         $pageNumber = null, $selector = null);
     
