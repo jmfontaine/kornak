@@ -26,10 +26,8 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
     public function getAll(Kajoa_Model_Conditions $conditions = null,
         $fields = '*', $orderBy = null, $limit = null)
     {
-        $tableName = $this->_table->info(Zend_Db_Table_Abstract::NAME);
         $select = $this->_table->select();
-        $select->from($tableName, $fields);
-        
+
         if (null !== $conditions) {
             $select->where($conditions);
         }
