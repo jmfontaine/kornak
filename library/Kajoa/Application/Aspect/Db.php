@@ -6,7 +6,9 @@ require_once 'Zend/Db/Table/Abstract.php';
 class Kajoa_Application_Aspect_Db extends Kajoa_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(
-        'production'  => array(),
+        'production'  => array(
+            'connectionCharset' => '', 
+        ),
         'testing'     => array(),
         'development' => array(),
     );
@@ -19,6 +21,12 @@ class Kajoa_Application_Aspect_Db extends Kajoa_Application_Aspect_Abstract
         unset($settings->adapter);
         
         $db = Zend_Db::factory($adapter, $settings);
+        
+        $connectionCharset = $this->getSetting('connectionCharset');
+        if (!empty($connectionCharset)) {
+            $db->query("SET NAMES '$connectionCharset'");
+        }
+        
         Zend_Db_Table_Abstract::setDefaultAdapter($db);
     }
 }
