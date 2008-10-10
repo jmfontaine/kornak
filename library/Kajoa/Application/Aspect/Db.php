@@ -7,24 +7,30 @@ class Kajoa_Application_Aspect_Db extends Kajoa_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(
         'production'  => array(
-            'connectionCharset' => '', 
+            'connectionCharset' => '',
+            'profilerClass'     => '', 
         ),
         'testing'     => array(),
-        'development' => array(),
+        'development' => array(
+            'profilerClass'     => 'Zend_Db_Profiler_Firebug', 
+        ),
     );
     
     public function init()
     {
         $settings = $this->getSettings();
 
-        $adapter = $settings->adapter;
-        unset($settings->adapter);
+        $db = Zend_Db::factory($settings->adapter, $settings);
         
-        $db = Zend_Db::factory($adapter, $settings);
+        if (!empty($settings->profilerClass)) {
+            Zend_Loader::loadClass($settings->profilerClass);
+            $profiler = new $settings->profilerClass('Database queries');
+            $profiler->setEnabled(true);
+            $db->setProfiler($profiler);
+        }
         
-        $connectionCharset = $this->getSetting('connectionCharset');
-        if (!empty($connectionCharset)) {
-            $db->query("SET NAMES '$connectionCharset'");
+        if (!empty($settings->connectionCharset)) {
+            $db->query("SET NAMES '$settings->connectionCharset'");
         }
         
         Zend_Db_Table_Abstract::setDefaultAdapter($db);
