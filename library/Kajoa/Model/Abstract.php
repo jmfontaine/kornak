@@ -1,40 +1,38 @@
 <?php
+require_once 'Kajoa/Loader.php';
+
 abstract class Kajoa_Model_Abstract
 {
-    abstract public function add(array $data);
-
-    abstract public function create();
+    protected $_adapters     = array();
+    protected $_itemsetClass = 'Kajoa_Model_Itemset';
     
-    abstract public function getAll(Kajoa_Model_Conditions $conditions = null,
-        $fields = '*', $orderBy = null, $limit = null);
-    
-    abstract public function getById($id);
-    
-    abstract public function getOne(Kajoa_Model_Conditions $conditions = null,
-        $fields = '*');
-    
-    abstract public function getPaginator($itemsPerPage = 10,
-        $pageNumber = null, $selector = null);
-    
-    abstract public function getPairs($key, $value, $orderBy = null);
-    
-    abstract public function getRandom($count = 10,
-        Kajoa_Model_Conditions $conditions = null);
-    
-    abstract public function remove(Kajoa_Model_Conditions $conditions);
-    
-    public function removeById($id)
+    protected function _createItemset($data)
     {
-        $conditions = new Kajoa_Model_Conditions('id', $id);
-        return $this->remove($conditions);
+        $config = array('data' => $data);
+        Kajoa_Loader::loadClass($this->_itemsetClass);
+        return new $this->_itemsetClass($config);
     }
     
-    abstract public function update(array $data,
-        Kajoa_Model_Conditions $conditions);
-    
-    public function updateById(array $data, $id)
+    public function __construct()
     {
-        $conditions = new Kajoa_Model_Conditions('id', $id);
-        return $this->update($data, $conditions);
+        $this->init();
+    }
+    
+    public function getAdapter($name = 'default')
+    {
+        if (array_key_exists($name, $this->_adapters)) {
+            return $this->_adapters[$name];
+        } else {
+            return false;
+        }
+    }
+    
+    public function init()
+    {
+    }
+    
+    public function setAdapter($adapter, $name = 'default')
+    {
+        $this->_adapters[$name] = $adapter;
     }
 }
