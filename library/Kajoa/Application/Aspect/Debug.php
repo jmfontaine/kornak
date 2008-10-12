@@ -15,6 +15,12 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
     
     protected $_phpErrors;
     
+    protected $_phpErrorsStats = array(
+        'error'   => 0,
+        'warning' => 0,
+        'notice'  => 0,
+    );
+    
     public function init()
     {
         $settings = $this->getSettings();
@@ -38,16 +44,19 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
         switch ($code) {
             case E_USER_ERROR:
                 $code = 'Error';
+                $this->_phpErrorsStats['errors']++;
                 break;
                 
             case E_WARNING:
             case E_USER_WARNING:
                 $code = 'Warning';
+                $this->_phpErrorsStats['warning']++;
                 break;
 
             case E_NOTICE:
             case E_USER_NOTICE:
                 $code = 'Notice';
+                $this->_phpErrorsStats['notice']++;
                 break;
             
             default:
@@ -57,6 +66,14 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
         
         $this->_phpErrors->setDestroy(false);
         $this->_phpErrors->addRow(array($code, $message, $file, $line));
+        
+        $label = sprintf(
+            'PHP errors (%d errors, %d warnings, %d notices)',
+            $this->_phpErrorsStats['error'],
+            $this->_phpErrorsStats['warning'],
+            $this->_phpErrorsStats['notice']
+        );
+        $this->_phpErrors->setLabel($label);
         
         // Let the error continue its way through PHP
         return false;
