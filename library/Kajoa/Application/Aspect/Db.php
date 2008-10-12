@@ -17,9 +17,14 @@ class Kajoa_Application_Aspect_Db extends Kajoa_Application_Aspect_Abstract
     {
         $connection = Zend_Db::factory($settings->adapter, $settings);
         
-        if (!empty($settings->profilerClass)) {
-            Zend_Loader::loadClass($settings->profilerClass);
-            $profiler = new $settings->profilerClass('Database queries');
+        if ($settings->profiler) {
+            if (!empty($settings->profilerClass)) {
+                $profilerClass = $settings->profilerClass;
+            } else {
+                $profilerClass = 'Zend_Db_Profiler_Firebug';                
+            }
+            Zend_Loader::loadClass($profilerClass);
+            $profiler = new $profilerClass('Database queries');
             $profiler->setEnabled(true);
             $connection->setProfiler($profiler);
         }
