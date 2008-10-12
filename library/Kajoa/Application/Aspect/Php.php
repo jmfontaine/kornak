@@ -7,7 +7,7 @@ class Kajoa_Application_Aspect_Php extends Kajoa_Application_Aspect_Abstract
         'production'  => array(
             'defaultCharset' => 'UTF-8',
             'displayErrors'  => false,
-            'errorReporting' => E_ALL,
+            'errorReporting' => 8191, // E_ALL|E_STRICT
             'timezone'       => 'Europe/London',
         ),
         'testing'     => array(),
