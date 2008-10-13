@@ -4,7 +4,15 @@ require_once 'Kajoa/Loader.php';
 abstract class Kajoa_Model_Abstract
 {
     protected $_adapters     = array();
+    protected $_itemClass    = 'Kajoa_Model_Item';
     protected $_itemsetClass = 'Kajoa_Model_Itemset';
+    
+    protected function _createItem($data)
+    {
+        $config = array('data' => $data);
+        Kajoa_Loader::loadClass($this->_itemClass);
+        return new $this->_itemClass($config);
+    }
     
     protected function _createItemset($data)
     {
