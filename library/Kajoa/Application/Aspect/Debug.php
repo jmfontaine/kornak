@@ -41,6 +41,11 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
     
     public function logPhpError($code, $message, $file, $line, $context)
     {
+        // ignore error if it has been suppressed with an @
+        if (error_reporting() == 0) {
+            return;
+        }        
+        
         switch ($code) {
             case E_USER_ERROR:
                 $code = 'Error';
