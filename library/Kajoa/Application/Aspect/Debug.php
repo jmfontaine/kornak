@@ -19,6 +19,7 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
         'error'   => 0,
         'warning' => 0,
         'notice'  => 0,
+        'strict'  => 0,
     );
     
     public function init()
@@ -63,7 +64,12 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
                 $code = 'Notice';
                 $this->_phpErrorsStats['notice']++;
                 break;
-            
+
+            case E_STRICT:
+                $code = 'Strict';
+                $this->_phpErrorsStats['strict']++;
+                break;
+                
             default:
                 require_once 'Kajoa/Application/Aspect/Exception.php';
                 throw new Kajoa_Application_Aspect_Exception("Unhandled error code '$code'");
@@ -73,10 +79,11 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
         $this->_phpErrors->addRow(array($code, $message, $file, $line));
         
         $label = sprintf(
-            'PHP errors (%d errors, %d warnings, %d notices)',
+            'PHP errors (%d errors, %d warnings, %d notices, % strict)',
             $this->_phpErrorsStats['error'],
             $this->_phpErrorsStats['warning'],
-            $this->_phpErrorsStats['notice']
+            $this->_phpErrorsStats['notice'],
+            $this->_phpErrorsStats['strict']
         );
         $this->_phpErrors->setLabel($label);
         
