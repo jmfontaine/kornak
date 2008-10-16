@@ -1,32 +1,37 @@
 <?php
-require_once 'Kajoa/Db/Table.php';
+require_once 'Kajoa/Model/Abstract.php';
 
 class Kajoa_Model_Db extends Kajoa_Model_Abstract
 {
-    protected $_table;
+    protected $_options = array();
     
-    public function __construct($options = array())
+    protected function _createItem($data)
     {
-        if (empty($options['name'])) {
-            $options['name'] = strtolower(get_class($this));
-        }
-        $this->_table = new Kajoa_Db_Table($options);
+        return parent::_createItem($data->toArray());
+    }
+    
+    protected function _createItemset($data)
+    {
+        return parent::_createItemset($data->toArray());
+    }
+    
+    public function __construct()
+    {
+        $adapter = Kajoa_Model_Adapter::factory('db-table', $this->_options);
+        $this->setAdapter($adapter);
+        
+        parent::__construct();
     }
     
     public function add(array $data)
     {
-        return $this->_table->insert($data);
-    }
-    
-    public function create()
-    {
-        return $this->_table->fetchNew();
+        return $this->getAdapter()->insert($data);
     }
     
     public function getAll(Kajoa_Model_Conditions $conditions = null,
         $fields = '*', $orderBy = null, $limit = null)
     {
-        $select = $this->_table->select();
+        $select = $this->getAdapter()->select();
 
         if (null !== $conditions) {
             $select->where($conditions);
@@ -40,119 +45,30 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
             $select->limit($limit);
         }
         
-        return $this->_table->fetchAll($select);
-    }
-
-    public function getOne(Kajoa_Model_Conditions $conditions = null,
-        $fields = '*')
-    {
-        $result = $this->getAll($conditions, $fields, null, '1');
         
-        if (!empty($result)) {
-            return $result->current();
-        } else {
-            return $result;
+        $data = $this->getAdapter()->fetchAll($select);
+        if (false !== $data) {
+            $data = $this->_createItemset($data);
         }
+        return $data;
     }
     
     public function getById($id)
     {
-        return $this->_table->find($id)->current();
-    }
-
-    public function getPaginator($itemsPerPage = 10, $pageNumber = null,
-        $selector = null)
-    {
-        if (null === $selector) {
-            $selector = $this->_table->select();
+        $data = $this->getAdapter()->find($id)->current();
+        if (false !== $data) {
+            $data = $this->_createItem($data);
         }
-        
-        if (!$selector instanceof Zend_Db_Select) {
-            $message  = '$selector must be a instance of the Zend_Db_Select ';
-            $message .= 'class';
-            throw new Kajoa_Exception($message);
-        }
-        
-        $paginator = new Zym_Paginate_DbTable($this->_table, $selector);
-        $paginator->setRowLimit($itemsPerPage);
-        
-        if (null !== $pageNumber && $paginator->hasPageNumber($pageNumber)) {
-            $paginator->setCurrentPageNumber($pageNumber);
-        }
-
-        return $paginator;
-    }
-    
-    /**
-     * Get associate array with $key as array key and $value as array value
-     * $orderBy specify the ordonate field.
-     * $orderBy could be a string or an array
-     * 
-     * Example : 
-     * $orderBy = array('field1', 'field2' => 'DESC', 'field3' => 'ASC');
-     * 
-     * @param string $key
-     * @param string $value
-     * @param mixed $orderBy
-     * @return array
-     */
-    public function getPairs($key, $value, $orderBy = null)
-    {
-        $fields = array($key, $value);
-        
-        $tableName = $this->_table->info(Zend_Db_Table_Abstract::NAME);
-        
-        $select = $this->_table->select();
-        $select->from($tableName, $fields);
-        
-        $order = array();
-        if (null !== $orderBy) {
-            if (is_string($orderBy)) {
-                $order = $orderBy . ' ASC'; 
-            } elseif (is_array($orderBy)) {
-                foreach ($orderBy as $key => $value) {
-                    if (is_int($key)) {
-                        $order[] = $value . ' ASC';
-                    } else {
-                        $order[] = $key . ' ' . $value;
-                    } 
-                }
-            } else {
-                throw new Kajoa_Exception('"$orderBy" must be a string or an array');
-            }
-            $select->order($order);
-        }
-        return $this->_table->getAdapter()->fetchPairs($select);
-    }
-    
-    public function getRandom($count = 10, Kajoa_Model_Conditions $conditions = null)
-    {
-        $tableName = $this->_table->info(Zend_Db_Table_Abstract::NAME);
-        
-        $select = $this->_table->select();
-        $select->from($tableName);
-        $select->order('RAND()');
-        $select->limit($count);
-        
-        if (null !== $conditions) {
-            $select->where($conditions->toSql());
-        }
-        
-        return $this->_table->fetchAll($select);
-    }
-    
-    public function getTable()
-    {
-        return $this->_table;
+        return $data;
     }
     
     public function remove(Kajoa_Model_Conditions $conditions)
     {
-        return $this->_table->delete($conditions->toSql());
+        return $this->getAdapter()->delete($conditions->toSql());
     }
     
     public function update(array $data, Kajoa_Model_Conditions $conditions)
     {
-        return $this->_table->update($data, $conditions->toSql());
+        return $this->getAdapter()->update($data, $conditions->toSql());
     }
 }
