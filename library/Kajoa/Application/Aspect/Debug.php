@@ -49,8 +49,9 @@ class Kajoa_Application_Aspect_Debug extends Kajoa_Application_Aspect_Abstract
         
         switch ($code) {
             case E_USER_ERROR:
+            case E_RECOVERABLE_ERROR:
                 $code = 'Error';
-                $this->_phpErrorsStats['errors']++;
+                $this->_phpErrorsStats['error']++;
                 break;
                 
             case E_WARNING:
