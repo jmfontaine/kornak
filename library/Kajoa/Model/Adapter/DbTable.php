@@ -14,4 +14,14 @@ class Kajoa_Model_Adapter_Dbtable
     {
         $this->_table = new Kajoa_Db_Table($options);
     }
+     
+    public function getTable()
+    {
+        return $this->_table;
+    }
+
+    public function setTable(Kajoa_Db_Table $table)
+    {
+        $this->_table = $table;
+    }
 }
