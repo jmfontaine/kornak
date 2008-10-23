@@ -20,6 +20,12 @@ class Kajoa_View_Helper_BodyClass extends Zend_View_Helper_Placeholder_Container
         
         return $this;
     }
+    
+    public function has($class)
+    {
+        $classes = (array) $this->getValue();
+        return in_array($class, $classes);
+    }
 
     public function toString($indent = null)
     {
