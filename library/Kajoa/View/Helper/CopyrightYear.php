@@ -1,7 +1,7 @@
 <?php
 class Kajoa_View_Helper_CopyrightYear extends Zend_View_Helper_Abstract
 {
-    public function CopyrightYear($year)
+    public function copyrightYear($year)
     {
         $currentYear = date('Y');
         
