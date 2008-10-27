@@ -7,12 +7,18 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
     
     protected function _createItem($data)
     {
+        if (is_object($data)) {
+            $data = $data->toArray();
+        }
         return parent::_createItem($data->toArray());
     }
     
     protected function _createItemset($data)
     {
-        return parent::_createItemset($data->toArray());
+        if (is_object($data)) {
+            $data = $data->toArray();
+        }
+        return parent::_createItemset($data);
     }
     
     public function __construct()
@@ -32,7 +38,7 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         $fields = '*', $orderBy = null, $limit = null)
     {
         $select = $this->getAdapter()->select();
-
+        
         if (null !== $conditions) {
             $select->where($conditions);
         }
@@ -62,9 +68,34 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         return $data;
     }
     
+    public function getOption($name)
+    {
+        if (array_key_exists($name, $this->_options)) {
+            return $this->_options[$name];
+        }
+        
+        return false;
+    }
+    
+    public function getTable()
+    {
+        return $this->getAdapter()->getAdapter();        
+    }
+    
+    public function getTableName()
+    {
+        $this->getOption('name');
+    }
+    
     public function remove(Kajoa_Model_Conditions $conditions)
     {
         return $this->getAdapter()->delete($conditions->toSql());
+    }
+    
+    public function select()
+    {
+        require_once 'Zend/Db/Select.php';
+        return $this->getAdapter()->getTable()->select();
     }
     
     public function update(array $data, Kajoa_Model_Conditions $conditions)
