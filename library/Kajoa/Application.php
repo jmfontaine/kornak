@@ -36,6 +36,7 @@ class Kajoa_Application
     );
     protected $_environment = self::ENVIRONMENT_PRODUCTION;
     protected $_settings;
+    protected $_shellClass;
     
     protected function _getDefaultApplicationSettings($environment)
     {
@@ -202,6 +203,11 @@ class Kajoa_Application
         return $this->_settings;
     }
     
+    public function getShellClass()
+    {
+        return $this->_shellClass;
+    }
+    
     public function getTempPath()
     {
         return $this->_applicationSettings->path->temp;
@@ -240,10 +246,28 @@ class Kajoa_Application
         $instance->dispatch();
     }
     
+    public static function runShell($shellClass, $settings = null,
+        $environment = self::ENVIRONMENT_PRODUCTION)
+    {
+        if (null === $settings) {
+            $settings = './config/settings.ini';
+        }
+        
+        self::run($settings, $environment);
+
+        self::getInstance()->setShellClass($shellClass);
+        call_user_func(array($shellClass, 'run'));
+    }
+    
     public function setEnvironment($environment)
     {
         $this->_environment = $environment;
 
         return $this;
+    }
+    
+    public function setShellClass($class)
+    {
+        $this->_shellClass = $class;
     }
 }
