@@ -10,7 +10,7 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         if (is_object($data)) {
             $data = $data->toArray();
         }
-        return parent::_createItem($data->toArray());
+        return parent::_createItem($data);
     }
     
     protected function _createItemset($data)
@@ -68,6 +68,27 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
         return $data;
     }
     
+    public function getOne(Kajoa_Model_Conditions $conditions = null,
+        $fields = '*', $orderBy = null)
+    {
+        $select = $this->getAdapter()->select();
+        $select->limit(1);
+        
+        if (null !== $conditions) {
+            $select->where($conditions);
+        }
+        
+        if (null !== $orderBy) {
+            $select->order($orderBy);
+        }
+        
+        $data = $this->getAdapter()->fetchRow($select);
+        if (null !== $data) {
+            $data = $this->_createItem($data);
+        }
+        return $data;
+    }
+    
     public function getOption($name)
     {
         if (array_key_exists($name, $this->_options)) {
@@ -91,6 +112,12 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
     {
         return $this->getAdapter()->delete($conditions->toSql());
     }
+
+    public function removeById($id)
+    {
+        $conditions = new Kajoa_Model_Conditions('id', $id);
+        return $this->remove($conditions);
+    }
     
     public function select()
     {
@@ -101,5 +128,11 @@ class Kajoa_Model_Db extends Kajoa_Model_Abstract
     public function update(array $data, Kajoa_Model_Conditions $conditions)
     {
         return $this->getAdapter()->update($data, $conditions->toSql());
+    }
+
+    public function updateById($id, array $data)
+    {
+        $conditions = new Kajoa_Model_Conditions('id', $id);
+        return $this->update($data, $conditions);
     }
 }
