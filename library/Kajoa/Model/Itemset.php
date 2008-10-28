@@ -7,10 +7,13 @@ class Kajoa_Model_Itemset implements SeekableIterator, Countable
     protected $_data      = array();
     protected $_itemClass = 'Kajoa_Model_Item';
     protected $_items     = array();
+    protected $_model;
     protected $_pointer   = 0;
     
-    public function __construct(array $config)
+    public function __construct($model, array $config)
     {
+        $this->_model = $model;
+        
         if (isset($config['itemClass'])) {
             $this->_itemClass = $config['itemClass'];
         }
@@ -35,6 +38,7 @@ class Kajoa_Model_Itemset implements SeekableIterator, Countable
 
         if (empty($this->_items[$this->_pointer])) {
             $this->_items[$this->_pointer] = new $this->_itemClass(
+                $this->_model,
                 array('data' => $this->_data[$this->_pointer])
             );
         }

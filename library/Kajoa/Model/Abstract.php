@@ -11,14 +11,14 @@ abstract class Kajoa_Model_Abstract
     {
         $config = array('data' => $data);
         Kajoa_Loader::loadClass($this->_itemClass);
-        return new $this->_itemClass($config);
+        return new $this->_itemClass($this, $config);
     }
     
     protected function _createItemset($data)
     {
         $config = array('data' => $data);
         Kajoa_Loader::loadClass($this->_itemsetClass);
-        return new $this->_itemsetClass($config);
+        return new $this->_itemsetClass($this, $config);
     }
     
     public function __construct()
