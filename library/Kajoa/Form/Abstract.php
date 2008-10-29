@@ -7,7 +7,7 @@ class Kajoa_Form_Abstract extends Zend_Form
     
     public function __construct ($options = null)
     {
-        $this->addPrefixPath('Kajoa_Form', 'Kajoa/Form');
+        $this->addPrefixPath('Kajoa_Form_', 'Kajoa/Form/');
 
         $this->setMethod('post')
              ->setAttrib('accept-charset', 'UTF-8');        
