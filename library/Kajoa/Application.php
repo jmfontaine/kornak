@@ -198,6 +198,26 @@ class Kajoa_Application
         return $this->_applicationSettings->path->public;
     }
     
+    public function getSetting($name)
+    {
+        $setting = null;
+        
+        if (isset($this->_settings->production->application->$name)) {
+            $setting = $this->_settings->production->application->$name;
+        }
+        
+        $environment = $this->getEnvironment();
+        if (isset($this->_settings->environment->application->$name)) {
+            $setting = $this->_settings->environment->application->$name;
+        }
+
+        if (null === $setting) {
+            throw new Kajoa_Exception("Unknown setting '$name'");
+        }
+        
+        return $setting;
+    }
+    
     public function getSettings()
     {
         return $this->_settings;
