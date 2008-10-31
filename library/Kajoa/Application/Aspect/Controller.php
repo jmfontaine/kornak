@@ -37,13 +37,10 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
                 // Handle hostname if present
                 $hostnameRoute = null;
                 if (isset($routes->hostname)) {
-                    $route = new Zend_Controller_Router_Route_Static('/');
-                    
                     $hostnameRoute = new Zend_Controller_Router_Route_Hostname(
                         $routes->hostname->route,
                         array('locale' => $locale)
                     );
-                    $router->addRoute('full-' . $locale, $hostnameRoute->chain($route));
                     unset($routes->hostname);
                 }
                 
@@ -52,10 +49,11 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
                     Zend_Loader::loadClass($class);
     
                     $route = call_user_func(array($class, 'getInstance'), $values);
-                    $router->addRoute($name . '-' . $locale, $route);
                     
-                    if (null !== $hostnameRoute) {
-                        $router->addRoute('full-' . $name . '-' . $locale, $hostnameRoute->chain($route));
+                    if (null === $hostnameRoute) {
+                        $router->addRoute($name . '-' . $locale, $route);
+                    } else {
+                        $router->addRoute($name . '-' . $locale, $hostnameRoute->chain($route));
                     }
                 }
             }
