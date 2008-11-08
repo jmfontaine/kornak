@@ -57,7 +57,7 @@ class Kajoa_Application_Aspect_Mail extends Kajoa_Application_Aspect_Abstract
 
         if (null == $settings->type) {
             foreach ($settings as $transportName => $transportSettings) {
-                $this->_loadConnection($transportName, $transportSettings);
+                $this->_loadTransport($transportName, $transportSettings);
             }
         } else {
             $this->_loadTransport('default', $settings);
