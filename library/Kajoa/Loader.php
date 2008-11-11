@@ -7,25 +7,25 @@ class Kajoa_Loader extends Zend_Loader
     {
         $frontController = Zend_Controller_Front::getInstance();
         if (null === $module) {
-            $module = $frontController->getDefaultModule();            
+            $module = $frontController->getDefaultModule();
         }
-        
-        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath(); 
-        $formPath        = $applicationPath . '/modules/' . $module . '/forms';  
-        
-        self::loadClass($name, $formPath);
+
+        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        $formPath        = $applicationPath . '/modules/' . $module . '/forms';
+
+        self::loadClass($name . 'Form', $formPath);
     }
-    
+
     public static function loadModel($name, $module = null)
     {
         $frontController = Zend_Controller_Front::getInstance();
         if (null === $module) {
-            $module = $frontController->getDefaultModule();            
+            $module = $frontController->getDefaultModule();
         }
-        
-        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath(); 
-        $modelPath       = $applicationPath . '/modules/' . $module . '/models';  
-        
-        self::loadClass($name, $modelPath);
+
+        $applicationPath = Kajoa_Application::getInstance()->getApplicationPath();
+        $modelPath       = $applicationPath . '/modules/' . $module . '/models';
+
+        self::loadClass($name . 'Model', $modelPath);
     }
 }
