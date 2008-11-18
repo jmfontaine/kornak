@@ -13,15 +13,15 @@ class Kajoa_Application_Aspect_Translate extends Kajoa_Application_Aspect_Abstra
         'testing'     => array(),
         'development' => array(),
     );
-    
+
     public function init()
     {
         $dataPath         = $this->getApplication()->getDataPath();
-        $translationsPath = $dataPath . '/translations'; 
-        
+        $translationsPath = realpath($dataPath . '/translations');
+
         $adapter   = $this->getSetting('adapter');
         $options   = array('scan' => $this->getSetting('scanMode'));
         $translate = new Zend_Translate($adapter, $translationsPath, null, $options);
         Zend_Registry::set('Zend_Translate', $translate);
-    }    
+    }
 }
