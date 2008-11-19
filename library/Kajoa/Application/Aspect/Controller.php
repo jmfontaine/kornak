@@ -6,7 +6,7 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
 {
     protected $_defaultSettings = array(
         'production'  => array(
-            'mapHostnameToLocale' => false,
+            'mapHostnameToLocale' => array(),
             'routesFilePath'      => 'config/routes.ini',
             'throwException'      => false,
         ),
@@ -31,18 +31,15 @@ class Kajoa_Application_Aspect_Controller extends Kajoa_Application_Aspect_Abstr
         $applicationPath = $this->getApplication()->getApplicationPath();
         $routesFilePath  = $applicationPath . '/' . $this->getSetting('routesFilePath');
         $routesConfig    = new Zend_Config_Ini($routesFilePath, null, true);
+        $router->addConfig($routesConfig);
 
         // Map hostname to locale if needed
-        if (true == $this->getSetting('mapHostnameToLocale')) {
-            foreach ($routesConfig as $locale => $hostname) {
-                foreach ($hostname->chains as $route) {
-                    $defaults = $route->defaults;
-                    $defaults->locale = $locale;
-                }
-            }
+        $mapHostnameToLocale = $this->getSetting('mapHostnameToLocale')->toArray();
+        if (!empty($mapHostnameToLocale)) {
+            $frontController->registerPlugin(
+                new Kajoa_Controller_Plugin_MapHostnameToLocale($mapHostnameToLocale)
+            );
         }
-
-        $router->addConfig($routesConfig);
     }
 
     public function init()
