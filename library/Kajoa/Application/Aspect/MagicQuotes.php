@@ -13,7 +13,7 @@ class Kajoa_Application_Aspect_MagicQuotes extends Kajoa_Application_Aspect_Abst
     );
 
     protected function removeSlashes($array) {
-        foreach ($array as $key => $vvalue) {
+        foreach ($array as $key => $value) {
             if (is_array($value)) {
                 $array[$key] = $this->removeSlashes($value);
             } else {
@@ -22,7 +22,7 @@ class Kajoa_Application_Aspect_MagicQuotes extends Kajoa_Application_Aspect_Abst
         }
         return $array;
     }
-    
+
     public function init()
     {
         if ($this->getSettings()->remove_slashes && get_magic_quotes_gpc()) {
