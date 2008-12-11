@@ -116,7 +116,7 @@ class Kajoa_Application
     {
         $loader = new Zend_Loader_PluginLoader();
         $loader->addPrefixPath('Kajoa_Application_Aspect_', 'Kajoa/Application/Aspect/');
-        $loader->addPrefixPath('Application_Aspect_', $this->getApplicationPath() . '/aspects/');
+        $loader->addPrefixPath('Application_Application_Aspect_', $this->getLibraryPath() . '/Application/Application/Aspect/');
 
         $environment = $this->getEnvironment();
         $filter      = new Zend_Filter_Word_DashToCamelCase();
