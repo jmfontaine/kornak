@@ -24,13 +24,14 @@ class Kajoa_Form_Decorator_Label extends Zend_Form_Decorator_Label
             return $content;
         }
 
-        $includeErrors = !empty($options['includeErrors']);
-        if ($includeErrors && !empty($messages)) {
+        if (!empty($options['includeErrors'])) {
             unset($options['includeErrors']);
-            require_once 'Zend/Form/Decorator/HtmlTag.php';
-            $decorator = new Zend_Form_Decorator_HtmlTag();
-            $decorator->setOptions(array('tag' => 'strong'));
-            $label .= $decorator->render(current($messages));
+            if (!empty($messages)) {
+                require_once 'Zend/Form/Decorator/HtmlTag.php';
+                $decorator = new Zend_Form_Decorator_HtmlTag();
+                $decorator->setOptions(array('tag' => 'strong'));
+                $label .= $decorator->render(current($messages));
+            }
         }
 
         if (!empty($label)) {
