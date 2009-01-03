@@ -19,11 +19,7 @@ class Kajoa_Controller_Plugin_MapHostnameToLocale extends Zend_Controller_Plugin
 
     public function preDispatch(Zend_Controller_Request_Abstract $request)
     {
-        $url = Zend_Controller_Front::getInstance()
-                                    ->getRouter()
-                                    ->getCurrentRoute()
-                                    ->assemble();
-        $host = Zend_Uri::factory($url)->getHost();
+        $host = $_SERVER['HTTP_HOST'];
 
         // KLUDGE : Temporary workaround for problem with dots in INI config files
         $host = str_replace('.', '-', $host);
