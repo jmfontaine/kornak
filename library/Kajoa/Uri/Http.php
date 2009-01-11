@@ -523,6 +523,23 @@ class Kajoa_Uri_Http extends Zend_Uri_Http
         return in_array($sld, $this->_ccSld[$tld]);
     }
 
+    public function validateHost($host = null)
+    {
+        if ($host === null) {
+            $host = $this->_host;
+        }
+
+        // If the host is empty, then it is considered invalid
+        if (strlen($host) === 0) {
+            return false;
+        }
+
+        // Check the host against the allowed values; delegated to Zend_Filter.
+        $validate = new Zend_Validate_Hostname(Zend_Validate_Hostname::ALLOW_DNS);
+
+        return $validate->isValid($host);
+    }
+
     public function validateSecondLevelDomain($sld = null)
     {
         if (null === $sld) {
