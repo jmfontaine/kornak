@@ -219,8 +219,8 @@ class Kajoa_Application
         }
 
         $environment = $this->getEnvironment();
-        if (isset($this->_settings->environment->application->$name)) {
-            $setting = $this->_settings->environment->application->$name;
+        if (isset($this->_settings->$environment->application->$name)) {
+            $setting = $this->_settings->$environment->application->$name;
         }
 
         if (null === $setting) {
