@@ -5,7 +5,7 @@ require_once 'Zend/View/Helper/Placeholder/Container/Standalone.php';
 class Kajoa_View_Helper_BodyClass extends Zend_View_Helper_Placeholder_Container_Standalone
 {
     protected $_regKey = 'Kajoa_View_Helper_BodyClass';
-    
+
     public function bodyClass($class = null, $setType = Zend_View_Helper_Placeholder_Container_Abstract::APPEND)
     {
         if ($class) {
@@ -17,10 +17,10 @@ class Kajoa_View_Helper_BodyClass extends Zend_View_Helper_Placeholder_Container
                 $this->append($class);
             }
         }
-        
+
         return $this;
     }
-    
+
     public function has($class)
     {
         $classes = (array) $this->getValue();
@@ -38,7 +38,12 @@ class Kajoa_View_Helper_BodyClass extends Zend_View_Helper_Placeholder_Container
             $items[] = $item;
         }
 
-        return $indent . implode(' ', $items);
+        if (empty($items)) {
+            $result = '';
+        } else {
+            $result = $indent . ' class="' .  implode(' ', $items) . '"';
+        }
+        return $result;
     }
 
     public function __toString()
