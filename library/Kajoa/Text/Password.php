@@ -20,6 +20,7 @@
 
 /**
  * Generate random passwords either pronounceable or not.
+ *
  * @category   Kajoa
  * @package    Kajoa_Text
  * @copyright  Copyright (c) 2008-2009 Kajoa Group (http://www.kajoa.org/)
@@ -36,6 +37,7 @@ class Kajoa_Text_Password
 
     /**
      * Generate a random password either pronounceable or not depending on the type.
+     *
      * @param $length   int     Password length
      * @param $type     string  Password type
      * @return string   Generated password
@@ -51,6 +53,7 @@ class Kajoa_Text_Password
 
     /**
      * Generate random pronounceable password.
+     *
      * @param $length   int Password length
      * @return string   Generated password
      */
@@ -81,6 +84,7 @@ class Kajoa_Text_Password
 
     /**
      * Generate random unpronounceable password.
+     *
      * @param $length   int Password length
      * @return string   Generated password
      */
