@@ -80,7 +80,7 @@ class Kajoa_Filter_MaxLength implements Zend_Filter_Interface
      */
     public function setMaxLength($length)
     {
-        $this->_maxLength = $length;
+        $this->_maxLength = (int) $length;
         return $this;
     }
 }
