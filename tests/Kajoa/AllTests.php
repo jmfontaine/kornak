@@ -10,7 +10,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 
 require_once 'Kajoa/Filter/AllTests.php';
 require_once 'Kajoa/Model/AllTests.php';
-require_once 'Kajoa/CryptTest.php';
+require_once 'Kajoa/Text/AllTests.php';
 
 class Kajoa_AllTests
 {
@@ -25,7 +25,7 @@ class Kajoa_AllTests
 
         $suite->addTest(Kajoa_Filter_AllTests::suite());
         $suite->addTest(Kajoa_Model_AllTests::suite());
-        $suite->addTestSuite('Kajoa_CryptTest');
+        $suite->addTest(Kajoa_Text_AllTests::suite());
 
         return $suite;
     }
