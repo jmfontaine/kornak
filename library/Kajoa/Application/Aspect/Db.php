@@ -1,4 +1,23 @@
 <?php
+/**
+ * Kajoa
+ *
+ * LICENSE
+ *
+ * This source file is subject to the new BSD license that is bundled
+ * with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.kajoa.org/license/new-bsd
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to contact@kajoa.org so we can send you a copy immediately.
+ *
+ * @category   Kajoa
+ * @package    Kajoa_Application
+ * @copyright  Copyright (c) 2008-2009 Kajoa Group (http://www.kajoa.org/)
+ * @version    $Id$
+ */
+
 require_once 'Kajoa/Application/Aspect/Abstract.php';
 require_once 'Zend/Db.php';
 require_once 'Zend/Db/Table/Abstract.php';
@@ -12,43 +31,43 @@ class Kajoa_Application_Aspect_Db extends Kajoa_Application_Aspect_Abstract
         'testing'     => array(),
         'development' => array(),
     );
-    
+
     protected function _loadConnection($name, Zend_Config $settings)
     {
         $connection = Zend_Db::factory($settings->adapter, $settings);
-        
+
         if ($settings->profiler) {
             if (!empty($settings->profilerClass)) {
                 $profilerClass = $settings->profilerClass;
             } else {
-                $profilerClass = 'Zend_Db_Profiler_Firebug';                
+                $profilerClass = 'Zend_Db_Profiler_Firebug';
             }
             Zend_Loader::loadClass($profilerClass);
             $profiler = new $profilerClass('Database queries');
             $profiler->setEnabled(true);
             $connection->setProfiler($profiler);
         }
-        
+
         if (!empty($settings->connectionCharset)) {
             $connection->query("SET NAMES '$settings->connectionCharset'");
         }
-        
+
         if ($settings->isDefault) {
-            Zend_Db_Table_Abstract::setDefaultAdapter($connection);            
+            Zend_Db_Table_Abstract::setDefaultAdapter($connection);
         }
-        
+
         $this->_connections[$name] = $connection;
     }
-    
+
     public function getConnection($name = 'default')
     {
         if (!array_key_exists($name, $this->_connections)) {
             throw new Kajoa_Exception("Unknown connection ($name)");
         }
-        
+
         return $this->_connections[$name];
     }
-    
+
     public function init()
     {
         $settings = $this->getSettings();

@@ -13,7 +13,7 @@
  * to contact@kajoa.org so we can send you a copy immediately.
  *
  * @category   Kajoa
- * @package    Kajoa
+ * @package    Kajoa_Exception
  * @copyright  Copyright (c) 2008-2009 Kajoa Group (http://www.kajoa.org/)
  * @version    $Id$
  */
