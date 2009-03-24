@@ -5,12 +5,12 @@
 require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Kajoa_Text_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Kornak_Text_AllTests::main');
 }
 
-require_once 'Kajoa/Text/PasswordTest.php';
+require_once 'Kornak/Text/PasswordTest.php';
 
-class Kajoa_Text_AllTests
+class Kornak_Text_AllTests
 {
     public static function main()
     {
@@ -19,14 +19,14 @@ class Kajoa_Text_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Kajoa - Kajoa_Text');
+        $suite = new PHPUnit_Framework_TestSuite('Kornak - Kornak_Text');
 
-        $suite->addTestSuite('Kajoa_Text_PasswordTest');
+        $suite->addTestSuite('Kornak_Text_PasswordTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Kajoa_Text_AllTests::main') {
-    Kajoa_Model_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Kornak_Text_AllTests::main') {
+    Kornak_Model_AllTests::main();
 }

@@ -8,12 +8,12 @@ require_once 'PHPUnit/TextUI/TestRunner.php';
 require_once 'PHPUnit/Util/Filter.php';
 
 /*
- * Set error reporting to the level to which Kajoa code must comply.
+ * Set error reporting to the level to which Kornak code must comply.
  */
 error_reporting(E_ALL | E_STRICT);
 
 /*
- * Determine the root, library, and tests directories of Kajoa
+ * Determine the root, library, and tests directories of Kornak
  * distribution.
  */
 $rootPath    = dirname(dirname(__FILE__));
@@ -21,7 +21,7 @@ $libraryPath = $rootPath . DIRECTORY_SEPARATOR . 'library';
 $testsPath   = $rootPath . DIRECTORY_SEPARATOR . 'tests';
 
 /*
- * Prepend the Kajoa library/ and tests/ directories to the
+ * Prepend the Kornak library/ and tests/ directories to the
  * include_path. 
  */
 $path = array(
@@ -48,7 +48,7 @@ if (is_readable($testsPath . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 }
 
 /*
- * Add Kajoa library/ directory to the PHPUnit code coverage
+ * Add Kornak library/ directory to the PHPUnit code coverage
  * whitelist. This has the effect that only production code source files appear
  * in the code coverage report and that all production code source files, even
  * those that are not covered by a test yet, are processed.

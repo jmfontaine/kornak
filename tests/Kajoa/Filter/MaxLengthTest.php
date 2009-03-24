@@ -1,9 +1,9 @@
 <?php
 require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Kajoa/Filter/MaxLength.php';
+require_once 'Kornak/Filter/MaxLength.php';
 
-class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
+class Kornak_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
 {
     /**
         Utility methods
@@ -12,7 +12,7 @@ class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
     {
         require_once 'PHPUnit/TextUI/TestRunner.php';
 
-        $suite  = new PHPUnit_Framework_TestSuite('Kajoa_Filter_MaxLengthTest');
+        $suite  = new PHPUnit_Framework_TestSuite('Kornak_Filter_MaxLengthTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -30,7 +30,7 @@ class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
     public function testConstruct()
     {
         $length = 10;
-        $filter = new Kajoa_Filter_MaxLength($length);
+        $filter = new Kornak_Filter_MaxLength($length);
         $this->assertSame(
             $length,
             $filter->getMaxLength(),
@@ -40,7 +40,7 @@ class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
 
     public function testFilter()
     {
-        $filter = new Kajoa_Filter_MaxLength(10);
+        $filter = new Kornak_Filter_MaxLength(10);
         $this->assertSame(
             'A dummy bu',
             $filter->filter('A dummy but quite long string'),
@@ -51,7 +51,7 @@ class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
     public function testGetMaxLength()
     {
         $length = 10;
-        $filter = new Kajoa_Filter_MaxLength($length);
+        $filter = new Kornak_Filter_MaxLength($length);
         $this->assertSame(
             $length,
             $filter->getMaxLength(),
@@ -62,7 +62,7 @@ class Kajoa_Filter_MaxLengthTest extends PHPUnit_Framework_TestCase
     public function testSetMaxLength()
     {
         $length = 10;
-        $filter = new Kajoa_Filter_MaxLength();
+        $filter = new Kornak_Filter_MaxLength();
         $filter->setMaxLength($length);
         $this->assertSame(
             $length,

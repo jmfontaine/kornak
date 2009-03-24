@@ -1,6 +1,6 @@
-Kajoa is a framework build on top of Zend Framework.
+Kornak is a framework build on top of Zend Framework.
 
-http://www.kajoa.org/
+http://www.kornak-framework.org/
 
 RELEASE INFORMATION
 ---------------
@@ -13,15 +13,15 @@ NEW FEATURES
 INTENDED USE
 ------------
 
-The Kajoa community does not recommend this release for production use.
+The Kornak community does not recommend this release for production use.
 Please be aware that the API's introduced in this release may not be final and
-the Kajoa community does not guarantee backwards compatibility to this
-release in future releases of Kajoa.
+the Kornak community does not guarantee backwards compatibility to this
+release in future releases of Kornak.
 
 SYSTEM REQUIREMENTS
 -------------------
 
-Kajoa requires PHP 5.1.4 or later and works best with 5.2.3 or later.
+Kornak requires PHP 5.1.4 or later and works best with 5.2.3 or later.
 
 INSTALLATION
 ------------

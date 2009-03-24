@@ -5,12 +5,12 @@
 require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Kajoa_Model_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Kornak_Model_AllTests::main');
 }
 
-require_once 'Kajoa/Model/ConditionsTest.php';
+require_once 'Kornak/Model/ConditionsTest.php';
 
-class Kajoa_Model_AllTests
+class Kornak_Model_AllTests
 {
     public static function main()
     {
@@ -19,14 +19,14 @@ class Kajoa_Model_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Kajoa - Kajoa_Model');
+        $suite = new PHPUnit_Framework_TestSuite('Kornak - Kornak_Model');
 
-        $suite->addTestSuite('Kajoa_Model_ConditionsTest');
+        $suite->addTestSuite('Kornak_Model_ConditionsTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Kajoa_Model_AllTests::main') {
-    Kajoa_Model_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Kornak_Model_AllTests::main') {
+    Kornak_Model_AllTests::main();
 }

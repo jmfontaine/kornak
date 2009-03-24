@@ -1,9 +1,9 @@
 <?php
 require_once dirname(__FILE__) . '/../../TestHelper.php';
 
-require_once 'Kajoa/Model/Conditions.php';
+require_once 'Kornak/Model/Conditions.php';
 
-class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
+class Kornak_Model_ConditionsTest extends PHPUnit_Framework_TestCase
 {
     /**
         Utility methods
@@ -12,7 +12,7 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
     {
         require_once 'PHPUnit/TextUI/TestRunner.php';
 
-        $suite  = new PHPUnit_Framework_TestSuite('Kajoa_Model_ConditionsTest');
+        $suite  = new PHPUnit_Framework_TestSuite('Kornak_Model_ConditionsTest');
         $result = PHPUnit_TextUI_TestRunner::run($suite);
     }
 
@@ -34,11 +34,11 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
 
@@ -49,11 +49,11 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe');
+        $object = new Kornak_Model_Conditions('last_name', 'doe');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
     
@@ -70,7 +70,7 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                   ->will($this->returnValue("name = 'doe'"));   
         Zend_Db_Table_Abstract::setDefaultAdapter($dbAdapter);
         
-        $object = new Kajoa_Model_Conditions('name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('name', 'doe', '=');
         $this->assertSame($object->__toString(), $object->toSql());
     }
     
@@ -81,17 +81,17 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'first_name',
                 'value'    => 'john',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_AND,
+                'type'     => Kornak_Model_Conditions::TYPE_AND,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $object->andCondition('first_name', 'john', '=');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
@@ -103,17 +103,17 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'first_name',
                 'value'    => 'john',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_AND,
+                'type'     => Kornak_Model_Conditions::TYPE_AND,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe');
+        $object = new Kornak_Model_Conditions('last_name', 'doe');
         $object->andCondition('first_name', 'john');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
@@ -125,17 +125,17 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'first_name',
                 'value'    => 'john',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_AND,
+                'type'     => Kornak_Model_Conditions::TYPE_AND,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $object->andCondition('first_name', 'john', '=');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
@@ -147,25 +147,25 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'income',
                 'value'    => 40000,
                 'operator' => '>',
-                'type'     => Kajoa_Model_Conditions::TYPE_AND,
+                'type'     => Kornak_Model_Conditions::TYPE_AND,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $object->andCondition('income', 40000, '>');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
     
     public function testAndConditionInvalidOperator()
     {
-        $this->setExpectedException('Kajoa_Exception');
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $this->setExpectedException('Kornak_Exception');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $object->andCondition('income', 40000, '~');
     }
     
@@ -176,17 +176,17 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'last_name',
                 'value'    => 'smith',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_OR,
+                'type'     => Kornak_Model_Conditions::TYPE_OR,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe', '=');
+        $object = new Kornak_Model_Conditions('last_name', 'doe', '=');
         $object->orCondition('last_name', 'smith', '=');
         $this->assertSame($expectedConditions, $object->getConditions());
     }
@@ -198,17 +198,17 @@ class Kajoa_Model_ConditionsTest extends PHPUnit_Framework_TestCase
                 'property' => 'last_name',
                 'value'    => 'doe',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_NONE,
+                'type'     => Kornak_Model_Conditions::TYPE_NONE,
             ),
             array(
                 'property' => 'last_name',
                 'value'    => 'smith',
                 'operator' => '=',
-                'type'     => Kajoa_Model_Conditions::TYPE_OR,
+                'type'     => Kornak_Model_Conditions::TYPE_OR,
             ),
         );
         
-        $object = new Kajoa_Model_Conditions('last_name', 'doe');
+        $object = new Kornak_Model_Conditions('last_name', 'doe');
         $object->orCondition('last_name', 'smith');
         $this->assertSame($expectedConditions, $object->getConditions());
     }    

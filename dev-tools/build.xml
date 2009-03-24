@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!--
- Kajoa
+ Kornak
  Copyright (c) 2007-2008, Kanopée.
 
  License :
@@ -60,7 +60,7 @@
     clean.docs.api
         Clean only the API documentation.
 -->
-<project name="Kajoa" default="build" basedir=".">
+<project name="Kornak" default="build" basedir=".">
     <property file="${application.startdir}/build.properties" />
 
     <!-- Build everything --> 

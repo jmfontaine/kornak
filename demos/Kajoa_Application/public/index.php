@@ -1,3 +1,3 @@
 <?php
-require_once 'Kajoa/Application.php';
-Kajoa_Application::run();
+require_once 'Kornak/Application.php';
+Kornak_Application::run();

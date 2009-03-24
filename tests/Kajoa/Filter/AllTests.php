@@ -5,12 +5,12 @@
 require_once dirname(dirname(dirname(__FILE__))) . DIRECTORY_SEPARATOR . 'TestHelper.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'Kajoa_Filter_AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'Kornak_Filter_AllTests::main');
 }
 
-require_once 'Kajoa/Filter/MaxLengthTest.php';
+require_once 'Kornak/Filter/MaxLengthTest.php';
 
-class Kajoa_Filter_AllTests
+class Kornak_Filter_AllTests
 {
     public static function main()
     {
@@ -19,14 +19,14 @@ class Kajoa_Filter_AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Kajoa - Kajoa_Filter');
+        $suite = new PHPUnit_Framework_TestSuite('Kornak - Kornak_Filter');
 
-        $suite->addTestSuite('Kajoa_Filter_MaxLengthTest');
+        $suite->addTestSuite('Kornak_Filter_MaxLengthTest');
 
         return $suite;
     }
 }
 
-if (PHPUnit_MAIN_METHOD == 'Kajoa_Filter_AllTests::main') {
-    Kajoa_Filter_AllTests::main();
+if (PHPUnit_MAIN_METHOD == 'Kornak_Filter_AllTests::main') {
+    Kornak_Filter_AllTests::main();
 }

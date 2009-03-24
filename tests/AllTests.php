@@ -8,7 +8,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
  */
 require_once 'TestHelper.php';
 
-require_once 'Kajoa/AllTests.php';
+require_once 'Kornak/AllTests.php';
 
 class AllTests
 {
@@ -25,9 +25,9 @@ class AllTests
 
     public static function suite()
     {
-        $suite = new PHPUnit_Framework_TestSuite('Kajoa');
+        $suite = new PHPUnit_Framework_TestSuite('Kornak');
 
-        $suite->addTest(Kajoa_AllTests::suite());
+        $suite->addTest(Kornak_AllTests::suite());
 
         return $suite;
     }

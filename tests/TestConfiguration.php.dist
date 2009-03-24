@@ -1,6 +1,6 @@
 <?php
 /**
- * This file defines configuration for running the unit tests for Kajoa.
+ * This file defines configuration for running the unit tests for Kornak.
  * Some tests have dependencies to PHP extensions or databases
  * which may not necessary installed on the target system.  For these cases,
  * the ability to disable or configure testing is provided below.  Tests for

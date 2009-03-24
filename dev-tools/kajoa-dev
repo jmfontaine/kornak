@@ -3,7 +3,7 @@
 require_once 'Zend/Console/Getopt.php';
 require_once 'Zend/Filter/Word/DashToCamelCase.php';
 
-class KajoaDev
+class KornakDev
 {
     protected $_options;
     
@@ -27,7 +27,7 @@ class KajoaDev
     {
         $arguments  = ' --standard=Zend';
         $arguments .= ' --extensions=php';
-        $arguments .=  '--ignore=*/Kajoa/View/Smarty/Helpers/*';
+        $arguments .=  '--ignore=*/Kornak/View/Smarty/Helpers/*';
         
         if (!isset($this->_options->warning)) {
             $arguments .= ' -n'; 
@@ -78,7 +78,7 @@ class KajoaDev
     public static function displayUsage()
     {
         $usage  = "\n";
-        $usage .= "Usage: kajoa-dev [options] command\n";
+        $usage .= "Usage: kornak-dev [options] command\n";
         $usage .= "\n";
         $usage .= "Commands:\n";
         $usage .= "\tapi\t\tBuild API documentation\n";
@@ -109,7 +109,7 @@ class KajoaDev
 
             $instance = new self($options);
             $method  = $instance->_getMethodName($remainingArguments[0]);
-            if (method_exists('KajoaDev', $method)) {
+            if (method_exists('KornakDev', $method)) {
                 return $instance->$method();
             } else {
                 self::displayUsage();
@@ -122,4 +122,4 @@ class KajoaDev
     }
 }
 
-KajoaDev::run();
+KornakDev::run();
