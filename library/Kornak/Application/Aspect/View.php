@@ -24,7 +24,9 @@ require_once 'Zend/View.php';
 class Kornak_Application_Aspect_View extends Kornak_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(
-        'production'  => array(),
+        'production'  => array(
+            'helpers' => array(),
+        ),
         'testing'     => array(),
         'development' => array(),
     );
@@ -33,6 +35,10 @@ class Kornak_Application_Aspect_View extends Kornak_Application_Aspect_Abstract
     {
         $view = new Zend_View();
         $view->setHelperPath('Kornak/View/Helper/', 'Kornak_View_Helper_');
+
+        foreach ($this->getSetting('helpers') as $path => $prefix) {
+            $view->addHelperPath($path, $prefix);
+        }
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $viewRenderer->setView($view);
