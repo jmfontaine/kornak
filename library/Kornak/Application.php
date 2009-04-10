@@ -164,9 +164,13 @@ class Kornak_Application
         }
     }
 
-    public function getApplicationPath()
+    public function getApplicationPath($absolute = true)
     {
-        return $this->_applicationSettings->path->application;
+        $path = $this->_applicationSettings->path->application;
+        if ($absolute) {
+            $path = realpath($path);
+        }
+        return $path;
     }
 
     public function getAspect($name)
@@ -178,19 +182,31 @@ class Kornak_Application
         }
     }
 
-    public function getConfigPath()
+    public function getConfigPath($absolute = true)
     {
-        return $this->_applicationSettings->path->config;
+        $path = $this->_applicationSettings->path->config;
+        if ($absolute) {
+            $path = realpath($path);
+        }
+        return $path;
     }
 
-    public function getDataPath()
+    public function getDataPath($absolute = true)
     {
-        return $this->_applicationSettings->path->data;
+        $path = $this->_applicationSettings->path->data;
+        if ($absolute) {
+            $path = realpath($path);
+        }
+        return $path;
     }
 
-    public function getLibraryPath()
+    public function getLibraryPath($absolute = true)
     {
-        return $this->_applicationSettings->path->library;
+        $path = $this->_applicationSettings->path->library;
+        if ($absolute) {
+            $path = realpath($path);
+        }
+        return $path;
     }
 
     public function getEnvironment()
@@ -224,9 +240,13 @@ class Kornak_Application
         return $instance;
     }
 
-    public function getPublicPath()
+    public function getPublicPath($absolute = true)
     {
-        return $this->_applicationSettings->path->public;
+        $path = $this->_applicationSettings->path->public;
+        if ($absolute) {
+            $path = realpath($path);
+        }
+        return $path;
     }
 
     public function getSetting($name)
