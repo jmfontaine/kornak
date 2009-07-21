@@ -47,14 +47,11 @@ class Kornak_Form_Element_Xhtml extends Zend_Form_Element_Xhtml
         if (empty($decorators)) {
             $this->addDecorator('ViewHelper')
                  ->addDecorator('HtmlTag', array('tag' => 'dd'))
-                 ->addDecorator(
-                    'Label',
-                    array(
+                 ->addDecorator('Label', array(
                         'tag'            => 'dt',
                         'requiredSuffix' => $this->_requiredSuffix,
                         'includeErrors'  => $this->_includeErrors,
-                    )
-                 );
+                 ));
         }
     }
 

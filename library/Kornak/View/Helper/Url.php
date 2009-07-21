@@ -22,7 +22,8 @@ require_once 'Zend/View/Helper/Url.php';
 
 class Kornak_View_Helper_Url extends Zend_View_Helper_Url
 {
-    public function url(array $urlOptions = array(), $name = null, $reset = false, $encode = true, $autoConvertToRelative = true)
+    public function url(array $urlOptions = array(), $name = null,
+        $reset = false, $encode = true, $autoConvertToRelative = true)
     {
         $url = parent::url($urlOptions, $name, $reset, $encode);
 

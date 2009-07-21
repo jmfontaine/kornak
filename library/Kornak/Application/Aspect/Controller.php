@@ -49,9 +49,8 @@ class Kornak_Application_Aspect_Controller extends Kornak_Application_Aspect_Abs
         // Map hostname to locale if needed
         $mapHostnameToLocale = $this->getSetting('mapHostnameToLocale')->toArray();
         if (!empty($mapHostnameToLocale)) {
-            $frontController->registerPlugin(
-                new Kornak_Controller_Plugin_MapHostnameToLocale($mapHostnameToLocale)
-            );
+            $plugin = new Kornak_Controller_Plugin_MapHostnameToLocale($mapHostnameToLocale);
+            $frontController->registerPlugin($plugin);
         }
     }
 

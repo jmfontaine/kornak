@@ -98,13 +98,11 @@ class Kornak_Application_Aspect_Debug extends Kornak_Application_Aspect_Abstract
         $this->_phpErrors->setDestroy(false);
         $this->_phpErrors->addRow(array($code, $message, $file, $line));
 
-        $label = sprintf(
-            'PHP errors (%d errors, %d warnings, %d notices, %d strict)',
-            $this->_phpErrorsStats['error'],
-            $this->_phpErrorsStats['warning'],
-            $this->_phpErrorsStats['notice'],
-            $this->_phpErrorsStats['strict']
-        );
+        $label = sprintf('PHP errors (%d errors, %d warnings, %d notices, %d strict)',
+                         $this->_phpErrorsStats['error'],
+                         $this->_phpErrorsStats['warning'],
+                         $this->_phpErrorsStats['notice'],
+                         $this->_phpErrorsStats['strict']);
         $this->_phpErrors->setLabel($label);
 
         // Let the error continue its way through PHP

@@ -104,7 +104,7 @@ class Kornak_Model_Conditions
                     case 'like':
                         $operator = strtoupper($condition['operator']);
                         $clause   = "$type {$condition['property']} $operator ? ";
-                        $sql     .= $dbAdapter->quoteInto($clause,  $condition['value']);
+                        $sql     .= $dbAdapter->quoteInto($clause, $condition['value']);
                         break;
 
                     case 'in':

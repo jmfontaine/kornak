@@ -96,8 +96,10 @@ class Kornak_Form_Decorator_Label extends Zend_Form_Decorator_Label
         switch ($placement) {
             case self::APPEND:
                 return $content . $separator . $label;
+
             case self::PREPEND:
                 return $label . $separator . $content;
+
             case self::WRAP_BEFORE:
             case self::WRAP_AFTER:
                 $position   = strpos($label, '>');

@@ -56,10 +56,9 @@ class Kornak_Model_Itemset implements SeekableIterator, Countable
         }
 
         if (empty($this->_items[$this->_pointer])) {
-            $this->_items[$this->_pointer] = new $this->_itemClass(
-                $this->_model,
-                array('data' => $this->_data[$this->_pointer])
-            );
+            $config = array('data' => $this->_data[$this->_pointer]);
+            $item   = new $this->_itemClass($this->_model, $config);
+            $this->_items[$this->_pointer] = $item;
         }
 
         return $this->_items[$this->_pointer];

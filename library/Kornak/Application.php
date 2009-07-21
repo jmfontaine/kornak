@@ -135,13 +135,14 @@ class Kornak_Application
     {
         $loader = new Zend_Loader_PluginLoader();
         $loader->addPrefixPath('Kornak_Application_Aspect_', 'Kornak/Application/Aspect/');
-        $loader->addPrefixPath('Application_Application_Aspect_', $this->getLibraryPath() . '/Application/Application/Aspect/');
+        $loader->addPrefixPath('Application_Application_Aspect_',
+            $this->getLibraryPath() . '/Application/Application/Aspect/');
 
         $environment = $this->getEnvironment();
         $filter      = new Zend_Filter_Word_DashToCamelCase();
 
         $aspects = explode(',', $settings->order);
-        foreach($aspects as $name) {
+        foreach ($aspects as $name) {
             $className = $loader->load($name);
 
             $aspectSettings = null;
@@ -218,7 +219,7 @@ class Kornak_Application
 
         // Look for environment defined in a system environment variable
         $environment = getenv('KORNAK_ENV');
-        if(false !== $environment) {
+        if (false !== $environment) {
             return $environment;
         }
 
