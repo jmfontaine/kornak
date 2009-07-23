@@ -11,6 +11,7 @@ if (!defined('PHPUnit_MAIN_METHOD')) {
 require_once 'Kornak/Filter/AllTests.php';
 require_once 'Kornak/Model/AllTests.php';
 require_once 'Kornak/Text/AllTests.php';
+require_once 'Kornak/View/AllTests.php';
 
 class Kornak_AllTests
 {
@@ -26,6 +27,7 @@ class Kornak_AllTests
         $suite->addTest(Kornak_Filter_AllTests::suite());
         $suite->addTest(Kornak_Model_AllTests::suite());
         $suite->addTest(Kornak_Text_AllTests::suite());
+        $suite->addTest(Kornak_View_AllTests::suite());
 
         return $suite;
     }
