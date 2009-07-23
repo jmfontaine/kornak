@@ -23,7 +23,7 @@ require_once 'Zend/Filter/Word/DashToCamelCase.php';
 require_once 'Zend/Loader/PluginLoader.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Application
 {

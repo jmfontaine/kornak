@@ -21,7 +21,7 @@
 require_once 'Kornak/Application.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Controller_Action extends Zend_Controller_Action
 {

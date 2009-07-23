@@ -21,7 +21,7 @@
 require_once 'Kornak/Application/Aspect/Abstract.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Application_Aspect_MagicQuotes extends Kornak_Application_Aspect_Abstract
 {

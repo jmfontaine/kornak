@@ -21,7 +21,7 @@
 require_once "Zend/Loader.php";
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Loader extends Zend_Loader
 {

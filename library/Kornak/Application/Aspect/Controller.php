@@ -23,7 +23,7 @@ require_once 'Zend/Controller/Action/HelperBroker.php';
 require_once 'Zend/Controller/Front.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Application_Aspect_Controller extends Kornak_Application_Aspect_Abstract
 {

@@ -23,7 +23,7 @@ require_once 'Zend/Registry.php';
 require_once 'Zend/Translate.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Application_Aspect_Translate extends Kornak_Application_Aspect_Abstract
 {

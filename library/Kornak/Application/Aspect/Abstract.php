@@ -21,7 +21,7 @@
 require_once 'Kornak/Exception.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 abstract class Kornak_Application_Aspect_Abstract
 {

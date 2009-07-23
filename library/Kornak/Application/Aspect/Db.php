@@ -23,7 +23,7 @@ require_once 'Zend/Db.php';
 require_once 'Zend/Db/Table/Abstract.php';
 
 /**
- * @deprecated
+ * @deprecated Deprecated since version 0.2
  */
 class Kornak_Application_Aspect_Db extends Kornak_Application_Aspect_Abstract
 {
