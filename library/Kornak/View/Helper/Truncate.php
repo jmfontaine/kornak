@@ -18,13 +18,12 @@
  * @version    $Id$
  */
 
-require_once 'Kornak/Loader.php';
-
 class Kornak_View_Helper_Truncate extends Zend_View_Helper_Abstract
 {
     public function truncate($text, $length = 30)
     {
         if (strlen($text) > $length) {
+            require_once 'Kornak/Filter/MaxLength.php';
             $filter = new Kornak_Filter_MaxLength($length - 1);
             $text = $filter->filter($text) . '…';
         }
