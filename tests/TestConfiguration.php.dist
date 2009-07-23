@@ -13,6 +13,11 @@
  */
 
 /**
+ * Path to Zend Framework
+ */
+define('ZEND_FRAMEWORK_PATH', '');
+
+/**
  * PHPUnit Code Coverage / Test Report
  */
 define('TESTS_GENERATE_REPORT', false);

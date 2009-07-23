@@ -21,23 +21,6 @@ $libraryPath = $rootPath . DIRECTORY_SEPARATOR . 'library';
 $testsPath   = $rootPath . DIRECTORY_SEPARATOR . 'tests';
 
 /*
- * Prepend the Kornak library/ and tests/ directories to the
- * include_path. 
- */
-$path = array(
-    $libraryPath,
-    $testsPath,
-    get_include_path()
-);
-set_include_path(implode(PATH_SEPARATOR, $path));
-
-/*
- * Enable autoloading
- */
-require_once 'Zend/Loader.php';
-Zend_Loader::registerAutoload();
-
-/*
  * Load the user-defined test configuration file, if it exists; otherwise, load
  * the default configuration.
  */
@@ -46,6 +29,26 @@ if (is_readable($testsPath . DIRECTORY_SEPARATOR . 'TestConfiguration.php')) {
 } else {
     require_once $testsPath . DIRECTORY_SEPARATOR . 'TestConfiguration.php.dist';
 }
+
+/*
+ * Prepend the Kornak library/ and tests/ directories to the
+ * include_path.
+ */
+$path = array(
+    $libraryPath,
+    $testsPath,
+    ZEND_FRAMEWORK_PATH,
+    '.',
+);
+set_include_path(implode(PATH_SEPARATOR, $path));
+echo get_include_path();
+
+/*
+ * Enable autoloading
+ */
+require_once 'Zend/Loader/Autoloader.php';
+$autoloader = Zend_Loader_Autoloader::getInstance();
+$autoloader->setFallbackAutoloader(true);
 
 /*
  * Add Kornak library/ directory to the PHPUnit code coverage
