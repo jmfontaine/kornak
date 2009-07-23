@@ -18,6 +18,9 @@
  * @version    $Id$
  */
 
+/*
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_View_Helper_PartialLoop extends Zend_View_Helper_PartialLoop
 {
     protected $_params = array();
