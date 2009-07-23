@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Exception.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Exception extends Kornak_Exception
 {
 }

@@ -22,6 +22,9 @@ require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Db.php';
 require_once 'Zend/Db/Table/Abstract.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Db extends Kornak_Application_Aspect_Abstract
 {
     protected $_connections = array();

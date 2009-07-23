@@ -22,6 +22,9 @@ require_once 'Zend/Config/Ini.php';
 require_once 'Zend/Filter/Word/DashToCamelCase.php';
 require_once 'Zend/Loader/PluginLoader.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application
 {
     const ENVIRONMENT_DEVELOPMENT = 'development';

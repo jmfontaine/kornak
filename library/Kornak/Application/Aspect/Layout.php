@@ -21,6 +21,9 @@
 require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Layout.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Layout extends Kornak_Application_Aspect_Abstract
 {
     public function init()

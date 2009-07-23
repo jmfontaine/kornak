@@ -21,6 +21,9 @@
 require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Loader.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_AutoLoader extends Kornak_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(

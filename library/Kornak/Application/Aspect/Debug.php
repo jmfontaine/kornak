@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Application/Aspect/Abstract.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Debug extends Kornak_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(

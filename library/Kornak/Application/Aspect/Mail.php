@@ -21,6 +21,9 @@
 require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Mail.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Mail extends Kornak_Application_Aspect_Abstract
 {
     protected $_transports = array();

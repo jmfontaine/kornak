@@ -22,6 +22,9 @@ require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Registry.php';
 require_once 'Zend/Translate.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Translate extends Kornak_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(

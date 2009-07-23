@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Exception.php';
 
+/**
+ * @deprecated
+ */
 abstract class Kornak_Application_Aspect_Abstract
 {
     protected $_application;

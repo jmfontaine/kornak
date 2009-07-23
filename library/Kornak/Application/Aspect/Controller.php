@@ -22,6 +22,9 @@ require_once 'Kornak/Application/Aspect/Abstract.php';
 require_once 'Zend/Controller/Action/HelperBroker.php';
 require_once 'Zend/Controller/Front.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Application_Aspect_Controller extends Kornak_Application_Aspect_Abstract
 {
     protected $_defaultSettings = array(
