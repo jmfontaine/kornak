@@ -20,6 +20,9 @@
 
 require_once "Zend/Loader.php";
 
+/**
+ * @deprecated
+ */
 class Kornak_Loader extends Zend_Loader
 {
     public static function loadForm($name, $module = null)
