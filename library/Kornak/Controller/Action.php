@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Application.php';
 
+/**
+ * @deprecated
+ */
 class Kornak_Controller_Action extends Zend_Controller_Action
 {
     protected $_application;
