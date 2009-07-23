@@ -20,6 +20,9 @@
 
 require_once 'Zend/Db/Table.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Db_Table extends Zend_Db_Table
 {
 
