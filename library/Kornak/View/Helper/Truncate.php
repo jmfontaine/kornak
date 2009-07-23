@@ -25,7 +25,8 @@ class Kornak_View_Helper_Truncate extends Zend_View_Helper_Abstract
     public function truncate($text, $length = 30)
     {
         if (strlen($text) > $length) {
-            $text = substr($text, 0, $length) . '…';
+            $filter = new Kornak_Filter_MaxLength($length - 1);
+            $text = $filter->filter($text) . '…';
         }
 
         return $text;
