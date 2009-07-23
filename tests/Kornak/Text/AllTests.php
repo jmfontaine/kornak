@@ -28,5 +28,5 @@ class Kornak_Text_AllTests
 }
 
 if (PHPUnit_MAIN_METHOD == 'Kornak_Text_AllTests::main') {
-    Kornak_Model_AllTests::main();
+    Kornak_Text_AllTests::main();
 }
