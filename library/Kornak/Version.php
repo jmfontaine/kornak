@@ -27,7 +27,7 @@
  */
 final class Kornak_Version
 {
-    const VERSION = '0.2';
+    const VERSION = '0.3dev';
 
     /**
      * Compare the specified Kornak version string $version
