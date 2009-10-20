@@ -1,7 +1,7 @@
 INSTALLATION
 ------------
 
-Kornak requires no special installation steps. Simply download the framework,
+Kornak requires no special installation steps. Simply download the code,
 extract it to the folder you would like to keep it in, and add its path
 to your PHP include_path.
 
