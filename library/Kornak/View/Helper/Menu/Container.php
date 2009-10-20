@@ -18,6 +18,9 @@
  * @version    $Id$
  */
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_View_Helper_Menu_Container extends Zend_View_Helper_Placeholder_Container_Abstract
 {
     protected $_attribs = array();

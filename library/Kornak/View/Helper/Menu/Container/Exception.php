@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Exception.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_View_Helper_Menu_Container_Exception extends Kornak_Exception
 {
 }

@@ -18,7 +18,9 @@
  * @version    $Id$
  */
 
-class Kornak_Model_Adapter_Db
+/**
+ * @deprecated Deprecated since version 0.2
+ */class Kornak_Model_Adapter_Db
 {
     protected $_db;
 

@@ -20,6 +20,9 @@
 
 require_once 'Zend/Form.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Abstract extends Zend_Form
 {
     protected $_formErrors = array();

@@ -20,6 +20,9 @@
 
 require_once 'Zend/Form/Element/Select.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Element_Select extends Zend_Form_Element_Select
 {
     protected $_includeErrors = true;

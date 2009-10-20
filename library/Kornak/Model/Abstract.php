@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Loader.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 abstract class Kornak_Model_Abstract
 {
     protected $_adapters     = array();

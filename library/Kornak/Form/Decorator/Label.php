@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Form/Decorator/Label.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Decorator_Label extends Zend_Form_Decorator_Label
 {
     const WRAP_BEFORE = 'WRAP_BEFORE';

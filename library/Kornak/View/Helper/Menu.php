@@ -20,6 +20,9 @@
 
 require_once 'Zend/View/Helper/Abstract.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_View_Helper_Menu extends Zend_View_Helper_Abstract
 {
     protected $_registry;

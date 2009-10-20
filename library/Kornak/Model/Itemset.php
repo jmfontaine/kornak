@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Loader.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Model_Itemset implements SeekableIterator, Countable
 {
     protected $_count;

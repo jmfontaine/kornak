@@ -18,6 +18,9 @@
  * @version    $Id$
  */
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Model_Conditions
 {
     const TYPE_NONE = 1;

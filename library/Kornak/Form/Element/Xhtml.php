@@ -20,6 +20,9 @@
 
 require_once 'Zend/Form/Element/Xhtml.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Element_Xhtml extends Zend_Form_Element_Xhtml
 {
     protected $_includeErrors = true;

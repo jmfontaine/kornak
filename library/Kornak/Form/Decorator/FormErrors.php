@@ -18,6 +18,9 @@
  * @version    $Id$
  */
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Decorator_FormErrors extends Zend_Form_Decorator_Abstract
 {
     protected $_placement = 'PREPEND';

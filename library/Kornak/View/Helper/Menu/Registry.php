@@ -20,6 +20,9 @@
 
 require_once 'Zend/View/Helper/Placeholder/Registry.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_View_Helper_Menu_Registry extends Zend_View_Helper_Placeholder_Registry
 {
     /**

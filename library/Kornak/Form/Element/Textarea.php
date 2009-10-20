@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Form/Element/Xhtml.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Form_Element_Textarea extends Kornak_Form_Element_Xhtml
 {
     /**

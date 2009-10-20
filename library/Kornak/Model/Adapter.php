@@ -21,6 +21,9 @@
 require_once 'Kornak/Loader.php';
 require_once 'Zend/Filter/Word/DashToCamelCase.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Model_Adapter
 {
     public static function factory($name, $options = array())

@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Db/Table.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Model_Adapter_Dbtable
 {
     protected $_table;

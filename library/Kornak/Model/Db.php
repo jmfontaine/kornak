@@ -20,6 +20,9 @@
 
 require_once 'Kornak/Model/Abstract.php';
 
+/**
+ * @deprecated Deprecated since version 0.2
+ */
 class Kornak_Model_Db extends Kornak_Model_Abstract
 {
     protected $_options = array();
