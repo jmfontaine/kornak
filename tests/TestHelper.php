@@ -41,7 +41,6 @@ $path = array(
     '.',
 );
 set_include_path(implode(PATH_SEPARATOR, $path));
-echo get_include_path();
 
 /*
  * Enable autoloading
