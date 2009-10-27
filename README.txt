@@ -1,4 +1,4 @@
-Kornak is a framework build on top of Zend Framework.
+Kornak is a set of components built to be primarily used with Zend Framework but most of them can can be used alone. 
 
 http://www.kornak-framework.org/
 
@@ -21,7 +21,9 @@ release in future releases of Kornak.
 SYSTEM REQUIREMENTS
 -------------------
 
-Kornak requires PHP 5.1.4 or later and works best with 5.2.3 or later.
+Kornak requires :
+- PHP 5.0 or later with the extensions date, pcre and spl activated
+- Zend Framework 1.8.0 or later
 
 INSTALLATION
 ------------
