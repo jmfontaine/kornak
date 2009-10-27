@@ -8,8 +8,9 @@ to your PHP include_path.
 SYSTEM REQUIREMENTS
 -------------------
 
-Kornak requires Zend Framework 1.7.0 and PHP 5.1.4 or later. Please note that
-it works best with PHP 5.2.3 or later.
+Kornak requires :
+- PHP 5.0 or later with the extensions date, pcre and spl activated
+- Zend Framework 1.8.0 or later
 
 CONFIGURING THE INCLUDE PATH
 ----------------------------
