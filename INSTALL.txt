@@ -1,31 +1,28 @@
 INSTALLATION
-------------
+============
 
 Kornak requires no special installation steps. Simply download the code,
 extract it to the folder you would like to keep it in, and add its path
 to your PHP include_path.
 
-SYSTEM REQUIREMENTS
--------------------
 
-Kornak requires :
-- PHP 5.0 or later with the extensions date, pcre and spl activated
-- Zend Framework 1.8.0 or later
+SYSTEM REQUIREMENTS
+===================
+
+Kornak requires PHP 5.3 or later
+
 
 CONFIGURING THE INCLUDE PATH
-----------------------------
+============================
 
 Once you have a copy of Kornak available, your application will need to
-access the framework classes. Though there are several ways to achieve this, your
+access the its classes. Though there are several ways to achieve this, your
 PHP include_path needs to contain the path to the folder where you extracted
-Kornak. You can find out more about the PHP
-include_path configuration directive here:
+Kornak. You can find out more about the PHP include_path configuration directive
+here:
 
 http://www.php.net/manual/en/ini.core.php#ini.include-path
 
 Instructions on how to change PHP configuration directives can be found here:
 
 http://www.php.net/manual/en/configuration.changes.php
-
-GETTING STARTED
----------------
